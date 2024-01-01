@@ -1,0 +1,136 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		8C15BC252B4277E2007D5FE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C15BC212B4277E1007D5FE3 /* mchat_client.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8C15BC172B4277E1007D5FE3;
+			remoteInfo = mchat_client;
+		};
+		8C15BC3E2B4277F4007D5FE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C15BC3A2B4277F3007D5FE3 /* mchat_server.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8C15BC302B4277F3007D5FE3;
+			remoteInfo = mchat_server;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8C15BC212B4277E1007D5FE3 /* mchat_client.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mchat_client.xcodeproj; path = mchat_client/mchat_client.xcodeproj; sourceTree = "<group>"; };
+		8C15BC3A2B4277F3007D5FE3 /* mchat_server.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mchat_server.xcodeproj; path = mchat_server/mchat_server.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		8C15BC072B4277CE007D5FE3 = {
+			isa = PBXGroup;
+			children = (
+				8C15BC3A2B4277F3007D5FE3 /* mchat_server.xcodeproj */,
+				8C15BC212B4277E1007D5FE3 /* mchat_client.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		8C15BC222B4277E1007D5FE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C15BC262B4277E2007D5FE3 /* mchat_client */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C15BC3B2B4277F3007D5FE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8C15BC3F2B4277F4007D5FE3 /* mchat_server */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		8C15BC082B4277CE007D5FE3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 8C15BC0B2B4277CE007D5FE3 /* Build configuration list for PBXProject "mothchat" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8C15BC072B4277CE007D5FE3;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8C15BC222B4277E1007D5FE3 /* Products */;
+					ProjectRef = 8C15BC212B4277E1007D5FE3 /* mchat_client.xcodeproj */;
+				},
+				{
+					ProductGroup = 8C15BC3B2B4277F3007D5FE3 /* Products */;
+					ProjectRef = 8C15BC3A2B4277F3007D5FE3 /* mchat_server.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8C15BC262B4277E2007D5FE3 /* mchat_client */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = mchat_client;
+			remoteRef = 8C15BC252B4277E2007D5FE3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8C15BC3F2B4277F4007D5FE3 /* mchat_server */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = mchat_server;
+			remoteRef = 8C15BC3E2B4277F4007D5FE3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin XCBuildConfiguration section */
+		8C15BC0C2B4277CE007D5FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		8C15BC0D2B4277CE007D5FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8C15BC0B2B4277CE007D5FE3 /* Build configuration list for PBXProject "mothchat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C15BC0C2B4277CE007D5FE3 /* Debug */,
+				8C15BC0D2B4277CE007D5FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8C15BC082B4277CE007D5FE3 /* Project object */;
+}
