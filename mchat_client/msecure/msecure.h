@@ -11,7 +11,7 @@
 #include "../types.h"
 
 typedef struct _MSEC_USER {
-    
+    WORD64 a;
 }MSEC_USER, *PMSEC_USER;
 
 #endif /* msecure_h */
