@@ -6,10 +6,6 @@
 	objectVersion = 56;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		8C15BC342B4277F3007D5FE3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C15BC332B4277F3007D5FE3 /* main.c */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		8C15BC2E2B4277F3007D5FE3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -24,7 +20,6 @@
 
 /* Begin PBXFileReference section */
 		8C15BC302B4277F3007D5FE3 /* mchat_server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mchat_server; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C15BC332B4277F3007D5FE3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +36,6 @@
 		8C15BC272B4277F3007D5FE3 = {
 			isa = PBXGroup;
 			children = (
-				8C15BC322B4277F3007D5FE3 /* mchat_server */,
 				8C15BC312B4277F3007D5FE3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,14 +46,6 @@
 				8C15BC302B4277F3007D5FE3 /* mchat_server */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		8C15BC322B4277F3007D5FE3 /* mchat_server */ = {
-			isa = PBXGroup;
-			children = (
-				8C15BC332B4277F3007D5FE3 /* main.c */,
-			);
-			path = mchat_server;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +105,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C15BC342B4277F3007D5FE3 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
