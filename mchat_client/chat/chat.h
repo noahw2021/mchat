@@ -9,6 +9,7 @@
 #define chat_h
 
 #include "../types.h"
+#include <wchar.h>
 
 typedef struct _CHAT_REGISTER {
     wchar_t Username[64]; // person's username
