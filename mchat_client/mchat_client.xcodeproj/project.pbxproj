@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C15BC412B42781F007D5FE3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C15BC402B42781F007D5FE3 /* main.c */; };
+		8C6A403E2B4D9BE700BABD9C /* chat_events.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A403D2B4D9BBE00BABD9C /* chat_events.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,8 +26,10 @@
 /* Begin PBXFileReference section */
 		8C15BC172B4277E1007D5FE3 /* mchat_client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mchat_client; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C15BC402B42781F007D5FE3 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		8C15BC452B42783F007D5FE3 /* msecure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = msecure.h; sourceTree = "<group>"; };
 		8C15BC462B42785E007D5FE3 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		8C15BC4C2B427AAD007D5FE3 /* netw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = netw.h; sourceTree = "<group>"; };
+		8C15BC4E2B427C7A007D5FE3 /* chat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chat.h; sourceTree = "<group>"; };
+		8C6A403D2B4D9BBE00BABD9C /* chat_events.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chat_events.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +48,8 @@
 			children = (
 				8C15BC402B42781F007D5FE3 /* main.c */,
 				8C15BC462B42785E007D5FE3 /* types.h */,
-				8C15BC442B42782B007D5FE3 /* msecure */,
 				8C15BC432B427825007D5FE3 /* netw */,
-				8C15BC422B427822007D5FE3 /* mcui */,
+				8C15BC4D2B427C6D007D5FE3 /* chat */,
 				8C15BC182B4277E1007D5FE3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,26 +62,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8C15BC422B427822007D5FE3 /* mcui */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = mcui;
-			sourceTree = "<group>";
-		};
 		8C15BC432B427825007D5FE3 /* netw */ = {
 			isa = PBXGroup;
 			children = (
+				8C15BC4C2B427AAD007D5FE3 /* netw.h */,
 			);
 			path = netw;
 			sourceTree = "<group>";
 		};
-		8C15BC442B42782B007D5FE3 /* msecure */ = {
+		8C15BC4D2B427C6D007D5FE3 /* chat */ = {
 			isa = PBXGroup;
 			children = (
-				8C15BC452B42783F007D5FE3 /* msecure.h */,
+				8C15BC4E2B427C7A007D5FE3 /* chat.h */,
+				8C6A403D2B4D9BBE00BABD9C /* chat_events.c */,
 			);
-			path = msecure;
+			path = chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C15BC412B42781F007D5FE3 /* main.c in Sources */,
+				8C6A403E2B4D9BE700BABD9C /* chat_events.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
