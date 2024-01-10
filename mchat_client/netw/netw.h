@@ -8,6 +8,8 @@
 #ifndef netw_h
 #define netw_h
 
+#include "../types.h"
+
 void NetwInit(void);
 void NetwShutdown(void);
 

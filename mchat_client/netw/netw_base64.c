@@ -6,3 +6,15 @@
 //
 
 #include "netw.h"
+
+void NetwBase64Encode(char* Buffer, unsigned long BufferSize,
+    void* Data, unsigned long DataSize
+) {
+    return;
+}
+
+void NetwBase64Decode(void* Buffer, unsigned long BufferSize,
+    char* Base64String
+) {
+    return;
+}

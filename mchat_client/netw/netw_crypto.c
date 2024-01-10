@@ -6,3 +6,15 @@
 //
 
 #include "netw.h"
+
+void NetwEncrypt256(void* Buffer, unsigned long BufferSize,
+    WORD64* Keys
+) {
+    return;
+}
+
+void NetwDecrypt256(void* Buffer, unsigned long BufferSize,
+    WORD64* Keys
+) {
+    return;
+}
