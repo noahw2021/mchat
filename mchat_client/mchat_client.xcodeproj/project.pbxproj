@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8C15BC412B42781F007D5FE3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C15BC402B42781F007D5FE3 /* main.c */; };
-		8C6A403E2B4D9BE700BABD9C /* chat_events.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A403D2B4D9BBE00BABD9C /* chat_events.c */; };
+		8C6A403E2B4D9BE700BABD9C /* chat_recvevents.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A403D2B4D9BBE00BABD9C /* chat_recvevents.c */; };
+		8C6A40402B4F35C300BABD9C /* chat_sendevents.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A403F2B4F35C300BABD9C /* chat_sendevents.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +30,8 @@
 		8C15BC462B42785E007D5FE3 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		8C15BC4C2B427AAD007D5FE3 /* netw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = netw.h; sourceTree = "<group>"; };
 		8C15BC4E2B427C7A007D5FE3 /* chat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chat.h; sourceTree = "<group>"; };
-		8C6A403D2B4D9BBE00BABD9C /* chat_events.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chat_events.c; sourceTree = "<group>"; };
+		8C6A403D2B4D9BBE00BABD9C /* chat_recvevents.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chat_recvevents.c; sourceTree = "<group>"; };
+		8C6A403F2B4F35C300BABD9C /* chat_sendevents.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chat_sendevents.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				8C15BC4E2B427C7A007D5FE3 /* chat.h */,
-				8C6A403D2B4D9BBE00BABD9C /* chat_events.c */,
+				8C6A403D2B4D9BBE00BABD9C /* chat_recvevents.c */,
+				8C6A403F2B4F35C300BABD9C /* chat_sendevents.c */,
 			);
 			path = chat;
 			sourceTree = "<group>";
@@ -136,8 +139,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6A40402B4F35C300BABD9C /* chat_sendevents.c in Sources */,
 				8C15BC412B42781F007D5FE3 /* main.c in Sources */,
-				8C6A403E2B4D9BE700BABD9C /* chat_events.c in Sources */,
+				8C6A403E2B4D9BE700BABD9C /* chat_recvevents.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
