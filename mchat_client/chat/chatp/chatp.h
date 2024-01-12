@@ -19,6 +19,7 @@ typedef struct _CHATP_MESSAGE {
     WORD64 ChannelID[2];
     time_t SendTime;
     time_t LastModified;
+    unsigned char WasMessageDeleted;
 }CHATP_MESSAGE, *PCHATP_MESSAGE;
 
 typedef struct _CHATP_CHANNEL {

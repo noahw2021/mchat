@@ -92,9 +92,10 @@ typedef struct _CHAT_RECVUSERNAME {
 typedef struct _CHAT_MESSAGE {
     union {
         wchar_t ChatMessage[2048];
-        WORD64 ChatMessageRaw[256];
+        WORD64 ChatMessageRaw[256 * sizeof(wchar_t)];
     };
     
+    wchar_t Username[128];
     WORD64 AuthorID[4];
     WORD64 MessageID[2];
     WORD64 ChannelID[2];

@@ -93,6 +93,7 @@ void ChatpHandler_Message(void* _Event) {
             ThisChannel->ChannelID[1] == Event->ChannelID[1]
         ) {
             Channel = ThisChannel;
+            break;
         }
     }
     
@@ -113,8 +114,8 @@ void ChatpHandler_Message(void* _Event) {
     Channel->MessageCount++;
     memset(NewMsg, 0, sizeof(CHATP_MESSAGE));
     
-    wcscpy(NewMsg->AuthorName, Channel->ChannelName);
-    NetwDecrypt256(Event->ChatMessageRaw, 2048 * sizeof(wchar_t), 
+    wcscpy(NewMsg->AuthorName, Event->Username);
+    NetwDecrypt256(Event->ChatMessageRaw, 2048 * sizeof(wchar_t),
         Channel->ChannelCryptorKeys);
     wcscpy(NewMsg->Message, Event->ChatMessage);
     memcpy(NewMsg->MessageId, Event->MessageID,
@@ -163,6 +164,7 @@ void ChatpHandler_RecvMsgUpdate(void* _Event) {
                     Channel->ChannelID[1] == Message->ChannelID[1]
                 ) {
                     ThisChannel = Channel;
+                    break;
                 }
             }
             
@@ -185,6 +187,36 @@ void ChatpHandler_RecvMsgUpdate(void* _Event) {
 }
 
 void ChatpHandler_RecvMsgDelete(void* _Event) {
+    PCHAT_MESSAGEDELETERECV Event = _Event;
+    
+    PCHATP_MESSAGE Message = NULL;
+    for (int i = 0; i < ChatpCtx->MessageCount; i++) {
+        PCHATP_MESSAGE ThisMessage = ChatpCtx->Messages[i];
+        
+        if (ThisMessage->MessageId[0] == Event->MessageID[0] &&
+            ThisMessage->MessageId[1] == Event->MessageID[1]
+        ) {
+            Message = ThisMessage;
+            break;
+        }
+    }
+    
+    if (!Message) {
+        free(Event);
+        return;
+    }
+    
+    Message->WasMessageDeleted = 1;
+    memset(Message->Message, 0, 2048 * sizeof(wchar_t));
+    
+    /*
+     We just need to signal that the message no longer exists,
+     and maybe destroy the actual message data, as no cache is
+     stored. This structure is recreated everytime the chat client
+     restarts. Maybe in the future I will make it free the memory,
+     but right now it is not required.
+     */
+    
     return;
 }
 
