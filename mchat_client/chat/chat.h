@@ -52,6 +52,7 @@ typedef struct _CHAT_CHANNELRECV {
     wchar_t ChannelName[128];
     WORD64 MessageCount;
     WORD64 ChannelID[2];
+    WORD64 ChannelCryptor[4];
 }CHAT_CHANNELRECV, *PCHAT_CHANNELRECV;
 
 typedef struct _CHAT_REGISTER {
@@ -70,15 +71,11 @@ typedef struct _CHAT_HELLO {
     
     WORD64 SenderID[4];
     WORD64 ReceipID[4];
-    
-    WORD64 MyReceiptNonce;
 }CHAT_HELLO, *PCHAT_HELLO;
 
 typedef struct _CHAT_YES {
     WORD64 SenderID[4];
     WORD64 ReceipID[4];
-    
-    WORD64 ReceiptNonce;
 }CHAT_YES, *PCHAT_YES;
 
 typedef struct _CHAT_GETUSERNAME {
@@ -95,8 +92,7 @@ typedef struct _CHAT_MESSAGE {
     wchar_t ChatMessage[2048];
     WORD64 AuthorID[4];
     WORD64 MessageId[2];
-    WORD64 Nonce;
-    WORD64 SentMillisecond;
+    time_t Sent;
 }CHAT_MESSAGE, *PCHAT_MESSAGE;
 
 typedef struct _CHAT_MESSAGEUPDATERECV {
@@ -148,6 +144,7 @@ extern PCHAT_CTX ChatCtx;
 
 int ChatGetEventList(void);
 int ChatGetEventTypes(int i);
+void* ChatiGetEvent(int i);
 
 PCHAT_YES          ChatGetEventAsYes(int i);
 PCHAT_MESSAGE      ChatGetEventAsMessage(int i);

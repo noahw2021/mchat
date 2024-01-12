@@ -62,5 +62,6 @@ void ChatpHandler_Message(void* _Event);
 void ChatpHandler_RecvMsgUpdate(void* _Event);
 void ChatpHandler_RecvMsgDelete(void* _Event);
 void ChatpHandler_RecvChannels(void* _Event);
+void ChatpHandler_RecvUsername(void* _Event);
 
 #endif /* chatp_h */
