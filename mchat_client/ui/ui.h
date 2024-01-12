@@ -9,13 +9,23 @@
 #define ui_h
 
 #include "../types.h"
+#include "../chat/chatp/chatp.h"
 #include <pthread.h>
+
+#define PANE_CHANNEL  1
+#define PANE_REQUESTS 2
+#define PANE_USERINFO 3
 
 typedef struct _UI_CTX {
     void* Threads;
     pthread_mutex_t AccessMutex;
     
     BYTE WantsShutdown;
+    
+    wchar_t InputBuffer[2048];
+    int InputBufferHeight;
+    PCHATP_CHANNEL CurrentChannel;
+    int CurrentPane;
 }UI_CTX, *PUI_CTX;
 extern PUI_CTX UiCtx;
 
@@ -37,5 +47,6 @@ void UiiPopColor(void);
 #define UIICOLOR_REDBG_WHITE 101
 #define UIICOLOR_YELLOWBG_WHITE 43
 #define UIICOLOR_GREENBG_WHITE 102
+#define UIICOLOR_WHITEBG 7
 
 #endif /* ui_h */

@@ -14,6 +14,7 @@
 
 #include "../chat/chat.h"
 #include "../chat/chatp/chatp.h"
+#include "panes/panes.h"
 
 PUI_CTX UiCtx;
 
@@ -28,15 +29,14 @@ void* UiiThread(void* Reserved) {
         }
         pthread_mutex_unlock(&UiCtx->AccessMutex);
         
-        usleep(1000000); // sleep for 1s
-        Ticks++; // increment tick count
-        
-        if ((Ticks % 10) == 0) { // every 10 seconds
+        if (((Ticks++) % 10) == 0) { // every 10 seconds
             // do something later
         }
         
         ChatpUpdateContext(); // update the chat context
         UiRender(); // update the user interface
+        
+        usleep(1000000); // sleep for 1s
     }
     
     return NULL;
@@ -48,6 +48,18 @@ void UiMain(void) {
     UiCtx = malloc(sizeof(UI_CTX));
     memset(UiCtx, 0, sizeof(UI_CTX));
     pthread_mutex_init(&UiCtx->AccessMutex, NULL);
+    
+    while (1) {
+        pthread_mutex_lock(&UiCtx->AccessMutex);
+        if (UiCtx->WantsShutdown) {
+            pthread_mutex_unlock(&UiCtx->AccessMutex);
+            break;
+        }
+        pthread_mutex_unlock(&UiCtx->AccessMutex);
+        
+        // get input
+        UispInputHandler();
+    }
     
     return;
 }

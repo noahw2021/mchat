@@ -23,8 +23,9 @@ void UipEndScene(void);
 
 void UipRenderChannel(PCHATP_CHANNEL Channel);
 void UipRenderUserInfo(PCHATP_CHANNEL Channel);
+void UipRenderRequests(PCHATP_REQUEST Requests, WORD32 Count);
 
-void UispInputHandler(void);
+void InputHandler(void);
 void UispMessageRenderer(PCHATP_MESSAGE Message);
 
 #endif /* panes_h */
