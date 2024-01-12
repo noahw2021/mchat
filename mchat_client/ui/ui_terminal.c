@@ -7,6 +7,7 @@
 
 #include "ui.h"
 #include <stdio.h>
+#include <sys/ioctl.h>
 
 void UiiSetPos(int x, int y) {
     printf("\033[%d;%dH", y, x);
@@ -19,9 +20,17 @@ void UiiClear(void) {
 }
 
 void UiiGetSize(int* x, int* y) {
-    
+    struct winsize WindowSize;
+    ioctl(0, TIOCGWINSZ, &WindowSize);
+    *x = WindowSize.ws_col;
+    *y = WindowSize.ws_row;
+    return;
 }
 
-void UiiSetColor(int Color) {
-    printf("\033[%dm\033[m", Color);
+void UiiPushColor(int i) {
+    printf("\033[%dm", i);
+}
+
+void UiiPopColor(void) {
+    printf("\033[m");
 }

@@ -10,10 +10,7 @@
 
 void UiMain(void) {
     UiiClear();
-    for (int i = 0; i < 100; i++) {
-        UiiSetColor(i);
-        printf("%i ", i);
-    }
+    
     
     return;
 }
