@@ -74,3 +74,12 @@ PCHAT_RECVUSERNAME ChatGetEventAsRecvUsername(int i) {
 PCHAT_LOGINRECV ChatGetEventAsRecvLogin(int i) {
     return ChatiGetEvent(i);
 }
+
+
+PCHAT_MESSAGEDELETERECV ChatGetEventAsRecvMessageDelete(int i){
+    return ChatiGetEvent(i);
+}
+
+PCHAT_MESSAGEUPDATERECV ChatGetEventAsRecvMessageUpdate(int i) {
+    return ChatiGetEvent(i);
+}

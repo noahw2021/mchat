@@ -83,10 +83,26 @@ typedef struct _CHAT_RECVUSERNAME {
 typedef struct _CHAT_MESSAGE {
     wchar_t ChatMessage[2048];
     WORD64 AuthorID[4];
+    WORD64 MessageId[2];
     WORD64 Nonce;
     WORD64 SentMillisecond;
 }CHAT_MESSAGE, *PCHAT_MESSAGE;
 
+typedef struct _CHAT_MESSAGEUPDATERECV {
+    WORD64 MessageID[2];
+    wchar_t NewBody[2048];
+    time_t EditDate;
+}CHAT_MESSAGEUPDATERECV, *PCHAT_MESSAGEUPDATERECV;
+
+typedef struct _CHAT_MESSAGEDELETERECV {
+    WORD64 MessageID[2];
+}CHAT_MESSAGEDELETERECV, *PCHAT_MESSAGEDELETERECV;
+
+typedef struct _CHAT_MESSAGEUPDATE  {
+    WORD64 MessageID[2];
+    wchar_t NewBody[2048];
+    BYTE WasDeleted;
+}CHAT_MESSAGEUPDATE, *PCHAT_MESSAGEUPDATE;
 // largest buffer reciept
 #define CHATSZ_MAX sizeof(CHAT_MESSAGE) + 1024
 
@@ -103,10 +119,12 @@ typedef struct _CHAT_CTX {
 }CHAT_CTX, *PCHAT_CTX;
 extern PCHAT_CTX ChatCtx;
 
-#define CHATEVENTTYPE_YES          0x02
-#define CHATEVENTTYPE_RECVLOGIN    0x04
-#define CHATEVENTTYPE_RECVUSERNAME 0x05
-#define CHATEVENTTYPE_MESSAGE      0x05
+#define CHATEVENTTYPE_YES           0x01
+#define CHATEVENTTYPE_RECVLOGIN     0x02
+#define CHATEVENTTYPE_RECVUSERNAME  0x03
+#define CHATEVENTTYPE_MESSAGE       0x04
+#define CHATEVENTTYPE_RECVMSGUPDATE 0x05
+#define CHATEVENTTYPE_RECVMSGDELETE 0x06
 
 int ChatGetEventList(void);
 int ChatGetEventTypes(int i);
@@ -115,11 +133,14 @@ PCHAT_YES          ChatGetEventAsYes(int i);
 PCHAT_MESSAGE      ChatGetEventAsMessage(int i);
 PCHAT_RECVUSERNAME ChatGetEventAsRecvUsername(int i);
 PCHAT_LOGINRECV    ChatGetEventAsRecvLogin(int i);
+PCHAT_MESSAGEDELETERECV ChatGetEventAsRecvMessageDelete(int i);
+PCHAT_MESSAGEUPDATERECV ChatGetEventAsRecvMessageUpdate(int i);
 
 void ChatEventSendRegister(PCHAT_REGISTER Event);
 void ChatEventSendHello(PCHAT_HELLO Event);
 void ChatEventSendGetUsername(PCHAT_GETUSERNAME Event);
 void ChatEventSendMessage(PCHAT_MESSAGE Event);
 void ChatEventSendLogin(PCHAT_LOGIN Event);
+void ChatEventSendMessageUpdate(PCHAT_MESSAGEUPDATE Event);
 
 #endif /* chat_h */

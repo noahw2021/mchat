@@ -17,6 +17,9 @@
 		8C6A404C2B51813200BABD9C /* netw_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A404B2B51813200BABD9C /* netw_init.c */; };
 		8C6A404E2B51813A00BABD9C /* netw_curlapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A404D2B51813A00BABD9C /* netw_curlapi.c */; };
 		8C6A40502B5181BF00BABD9C /* chat_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A404F2B5181BF00BABD9C /* chat_init.c */; };
+		8C6A40542B518B5800BABD9C /* chatp_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40532B518B5800BABD9C /* chatp_init.c */; };
+		8C6A40562B518B6800BABD9C /* chatp_context.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40552B518B6800BABD9C /* chatp_context.c */; };
+		8C6A40582B518BA200BABD9C /* chatp_send.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40572B518BA200BABD9C /* chatp_send.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +50,10 @@
 		8C6A404B2B51813200BABD9C /* netw_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = netw_init.c; sourceTree = "<group>"; };
 		8C6A404D2B51813A00BABD9C /* netw_curlapi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = netw_curlapi.c; sourceTree = "<group>"; };
 		8C6A404F2B5181BF00BABD9C /* chat_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chat_init.c; sourceTree = "<group>"; };
+		8C6A40512B51888B00BABD9C /* chatp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chatp.h; sourceTree = "<group>"; };
+		8C6A40532B518B5800BABD9C /* chatp_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_init.c; sourceTree = "<group>"; };
+		8C6A40552B518B6800BABD9C /* chatp_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_context.c; sourceTree = "<group>"; };
+		8C6A40572B518BA200BABD9C /* chatp_send.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_send.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +102,7 @@
 		8C15BC4D2B427C6D007D5FE3 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				8C6A40522B51888F00BABD9C /* chatp */,
 				8C15BC4E2B427C7A007D5FE3 /* chat.h */,
 				8C6A403D2B4D9BBE00BABD9C /* chat_recvevents.c */,
 				8C6A403F2B4F35C300BABD9C /* chat_sendevents.c */,
@@ -111,6 +119,17 @@
 				8C6A40492B517FE100BABD9C /* ui_terminal.c */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		8C6A40522B51888F00BABD9C /* chatp */ = {
+			isa = PBXGroup;
+			children = (
+				8C6A40512B51888B00BABD9C /* chatp.h */,
+				8C6A40532B518B5800BABD9C /* chatp_init.c */,
+				8C6A40552B518B6800BABD9C /* chatp_context.c */,
+				8C6A40572B518BA200BABD9C /* chatp_send.c */,
+			);
+			path = chatp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,9 +193,12 @@
 				8C6A404A2B517FE100BABD9C /* ui_terminal.c in Sources */,
 				8C6A40422B4F376100BABD9C /* netw_base64.c in Sources */,
 				8C6A40502B5181BF00BABD9C /* chat_init.c in Sources */,
+				8C6A40582B518BA200BABD9C /* chatp_send.c in Sources */,
 				8C6A404E2B51813A00BABD9C /* netw_curlapi.c in Sources */,
+				8C6A40542B518B5800BABD9C /* chatp_init.c in Sources */,
 				8C6A40442B4F377E00BABD9C /* netw_crypto.c in Sources */,
 				8C6A40402B4F35C300BABD9C /* chat_sendevents.c in Sources */,
+				8C6A40562B518B6800BABD9C /* chatp_context.c in Sources */,
 				8C6A404C2B51813200BABD9C /* netw_init.c in Sources */,
 				8C15BC412B42781F007D5FE3 /* main.c in Sources */,
 				8C6A403E2B4D9BE700BABD9C /* chat_recvevents.c in Sources */,
