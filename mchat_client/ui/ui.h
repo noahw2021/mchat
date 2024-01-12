@@ -8,7 +8,19 @@
 #ifndef ui_h
 #define ui_h
 
+#include "../types.h"
+#include <pthread.h>
+
+typedef struct _UI_CTX {
+    void* Threads;
+    pthread_mutex_t AccessMutex;
+    
+    BYTE WantsShutdown;
+}UI_CTX, *PUI_CTX;
+extern PUI_CTX UiCtx;
+
 void UiMain(void);
+void UiRender(void);
 
 void UiiSetPos(int x, int y);
 void UiiClear(void);

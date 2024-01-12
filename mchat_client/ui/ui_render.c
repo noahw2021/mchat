@@ -5,4 +5,10 @@
 //  Created by Noah Wooten on 1/12/24.
 //
 
-#include <stdio.h>
+#include "ui.h"
+
+#include "../chat/chatp/chatp.h"
+
+void UiRender(void) {
+    
+}
