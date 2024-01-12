@@ -54,7 +54,6 @@
 		8C6A40532B518B5800BABD9C /* chatp_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_init.c; sourceTree = "<group>"; };
 		8C6A40552B518B6800BABD9C /* chatp_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_context.c; sourceTree = "<group>"; };
 		8C6A40572B518BA200BABD9C /* chatp_send.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_send.c; sourceTree = "<group>"; };
-		8C6A405A2B51B85A00BABD9C /* db.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +102,6 @@
 		8C15BC4D2B427C6D007D5FE3 /* chat */ = {
 			isa = PBXGroup;
 			children = (
-				8C6A40592B51B85000BABD9C /* db */,
 				8C6A40522B51888F00BABD9C /* chatp */,
 				8C15BC4E2B427C7A007D5FE3 /* chat.h */,
 				8C6A403D2B4D9BBE00BABD9C /* chat_recvevents.c */,
@@ -132,14 +130,6 @@
 				8C6A40572B518BA200BABD9C /* chatp_send.c */,
 			);
 			path = chatp;
-			sourceTree = "<group>";
-		};
-		8C6A40592B51B85000BABD9C /* db */ = {
-			isa = PBXGroup;
-			children = (
-				8C6A405A2B51B85A00BABD9C /* db.h */,
-			);
-			path = db;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

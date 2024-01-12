@@ -53,6 +53,7 @@ typedef struct _CHAT_CHANNELRECV {
     WORD64 MessageCount;
     WORD64 ChannelID[2];
     WORD64 ChannelCryptor[4];
+    WORD64 LastMessageID[2];
 }CHAT_CHANNELRECV, *PCHAT_CHANNELRECV;
 
 typedef struct _CHAT_REGISTER {
@@ -165,6 +166,6 @@ void ChatEventSendGetUsername(PCHAT_GETUSERNAME Event);
 void ChatEventSendMessage(PCHAT_MESSAGE Event);
 void ChatEventSendLogin(PCHAT_LOGIN Event);
 void ChatEventSendMessageUpdate(PCHAT_MESSAGEUPDATE Event);
-void CahtEventSendMessageRequest(PCHAT_REQUESTMSGS Event);
+void ChatEventSendMessageRequest(PCHAT_REQUESTMSGS Event);
 
 #endif /* chat_h */

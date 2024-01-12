@@ -23,6 +23,7 @@ typedef struct _CHATP_CHANNEL {
     wchar_t ChannelName[128];
     PCHATP_MESSAGE Messages;
     WORD32 MessageCount;
+    WORD64 ChannelID[2];
     
     WORD64 ChannelCryptorKeys[4];
 }CHATP_CHANNEL, *PCHATP_CHANNEL;
@@ -41,7 +42,7 @@ typedef struct _CHATP_CTX {
     
     PCHATP_MESSAGE* Messages;
     WORD32 MessageCount;
-}CHATP_CTX, PCHATP_CTX;
+}CHATP_CTX, *PCHATP_CTX;
 extern PCHATP_CTX ChatpCtx;
 
 void ChatpInit(void);
