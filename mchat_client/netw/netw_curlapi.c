@@ -5,4 +5,13 @@
 //  Created by Noah Wooten on 1/12/24.
 //
 
-#include <stdio.h>
+#include "netw.h"
+#include <stdlib.h>
+
+char* NetwGETApi(char* Endpoint) {
+    return NULL;
+}
+
+void NetwPOSTApi(char* Endpoint, char* Data) {
+    return;
+}

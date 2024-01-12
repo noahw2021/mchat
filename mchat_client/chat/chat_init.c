@@ -5,4 +5,6 @@
 //  Created by Noah Wooten on 1/12/24.
 //
 
-#include <stdio.h>
+#include "chat.h"
+
+PCHAT_CTX ChatCtx;

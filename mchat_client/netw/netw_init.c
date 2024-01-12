@@ -5,4 +5,12 @@
 //  Created by Noah Wooten on 1/12/24.
 //
 
-#include <stdio.h>
+#include "netw.h"
+
+void NetwInit(void) {
+    return;
+}
+
+void NetwShutdown(void) {
+    return;
+}
