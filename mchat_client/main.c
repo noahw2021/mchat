@@ -6,3 +6,9 @@
 //
 
 #include "types.h"
+#include "ui/ui.h"
+
+int main(int argc, char** argv) {
+    UiMain();
+    return 0;
+}

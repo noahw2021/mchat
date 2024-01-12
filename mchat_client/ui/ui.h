@@ -8,5 +8,11 @@
 #ifndef ui_h
 #define ui_h
 
+void UiMain(void);
+
+void UiiSetPos(int x, int y);
+void UiiClear(void);
+void UiiGetSize(int* x, int* y);
+void UiiSetColor(int Color);
 
 #endif /* ui_h */
