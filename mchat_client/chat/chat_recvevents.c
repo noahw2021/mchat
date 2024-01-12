@@ -14,8 +14,10 @@
 int ChatGetEventList(void) {
     char* Request = malloc(256);
     sprintf(Request, "api0/Events_GetList?Secret="
-        "%016llX%016llX%016llX%016llX", ChatCtx->MySecret[0],
-        ChatCtx->MySecret[1], ChatCtx->MySecret[2], ChatCtx->MySecret[3]);
+        "%016llX%016llX%016llX%016llX&ClientFingerprint=%016llX%016llX",
+        ChatCtx->MySecret[0], ChatCtx->MySecret[1], ChatCtx->MySecret[2],
+        ChatCtx->MySecret[3], ChatCtx->ClientFingerprint[0],
+        ChatCtx->ClientFingerprint[1]);
     
     char* Response = NetwGETApi(Request);
     free(Request);
@@ -43,9 +45,10 @@ int ChatGetEventType(int i) {
 void* ChatiGetEvent(int i) {
     char* Request = malloc(256);
     sprintf(Request, "api0/Events_GetObject?Secret="
-        "%016llX%016llX%016llX%016llX&EventId=%i", ChatCtx->MySecret[0],
+        "%016llX%016llX%016llX%016llX&EventId=%i"
+        "&ClientFingerprint=%016llX%016llX", ChatCtx->MySecret[0],
         ChatCtx->MySecret[1], ChatCtx->MySecret[2], ChatCtx->MySecret[3],
-        i);
+        i, ChatCtx->ClientFingerprint[0], ChatCtx->ClientFingerprint[1]);
     
     char* Response = NetwGETApi(Request);
     free(Request);

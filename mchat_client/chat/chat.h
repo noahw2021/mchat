@@ -35,14 +35,24 @@ typedef struct _CHAT_LOGIN {
     wchar_t Username[64];
     WORD64 PasswordHash[4];
     WORD64 TemporaryToken[4];
+    WORD64 ClientFingerprint[2];
 }CHAT_LOGIN, *PCHAT_LOGIN;
 
 typedef struct _CHAT_LOGINRECV {
     BYTE WasSuccess;
     wchar_t ServerMessage[64];
+    
     WORD64 MyUserID[4];
     WORD64 MyClientSecret[8];
+    
+    WORD32 ChannelCount;
 }CHAT_LOGINRECV, *PCHAT_LOGINRECV;
+
+typedef struct _CHAT_CHANNELRECV {
+    wchar_t ChannelName[128];
+    WORD64 MessageCount;
+    WORD64 ChannelID[2];
+}CHAT_CHANNELRECV, *PCHAT_CHANNELRECV;
 
 typedef struct _CHAT_REGISTER {
     wchar_t Username[64]; // person's username
@@ -51,6 +61,7 @@ typedef struct _CHAT_REGISTER {
     WORD64 UniqueId[4]; // their client generated unique id
     WORD64 KeyBase[16];
     WORD64 ClientSecret[8];
+    WORD64 ClientFingerprint[2];
 }CHAT_REGISTER, *PCHAT_REGISTER;
 
 typedef struct _CHAT_HELLO {
@@ -103,6 +114,13 @@ typedef struct _CHAT_MESSAGEUPDATE  {
     wchar_t NewBody[2048];
     BYTE WasDeleted;
 }CHAT_MESSAGEUPDATE, *PCHAT_MESSAGEUPDATE;
+
+typedef struct _CHAT_REQUESTMSGS {
+    WORD64 ChannelID[2];
+    WORD64 FirstMessageId[2];
+    WORD64 MessagesToRequest;
+}CHAT_REQUESTMSGS, *PCHAT_REQUESTMSGS;
+
 // largest buffer reciept
 #define CHATSZ_MAX sizeof(CHAT_MESSAGE) + 1024
 
@@ -116,6 +134,7 @@ typedef struct _CHAT_CTX {
     WORD64 MyID[4];
     WORD64 MySecret[8];
     wchar_t MyUsername[64];
+    WORD64 ClientFingerprint[2];
 }CHAT_CTX, *PCHAT_CTX;
 extern PCHAT_CTX ChatCtx;
 
@@ -125,6 +144,7 @@ extern PCHAT_CTX ChatCtx;
 #define CHATEVENTTYPE_MESSAGE       0x04
 #define CHATEVENTTYPE_RECVMSGUPDATE 0x05
 #define CHATEVENTTYPE_RECVMSGDELETE 0x06
+#define CHATEVENTTYPE_RECVCHANNELS  0x07
 
 int ChatGetEventList(void);
 int ChatGetEventTypes(int i);
@@ -135,6 +155,7 @@ PCHAT_RECVUSERNAME ChatGetEventAsRecvUsername(int i);
 PCHAT_LOGINRECV    ChatGetEventAsRecvLogin(int i);
 PCHAT_MESSAGEDELETERECV ChatGetEventAsRecvMessageDelete(int i);
 PCHAT_MESSAGEUPDATERECV ChatGetEventAsRecvMessageUpdate(int i);
+PCHAT_CHANNELRECV       ChatGetEventAsRecvChannels(int i);
 
 void ChatEventSendRegister(PCHAT_REGISTER Event);
 void ChatEventSendHello(PCHAT_HELLO Event);
@@ -142,5 +163,6 @@ void ChatEventSendGetUsername(PCHAT_GETUSERNAME Event);
 void ChatEventSendMessage(PCHAT_MESSAGE Event);
 void ChatEventSendLogin(PCHAT_LOGIN Event);
 void ChatEventSendMessageUpdate(PCHAT_MESSAGEUPDATE Event);
+void CahtEventSendMessageRequest(PCHAT_REQUESTMSGS Event);
 
 #endif /* chat_h */

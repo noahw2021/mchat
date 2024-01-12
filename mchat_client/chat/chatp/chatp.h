@@ -23,6 +23,8 @@ typedef struct _CHATP_CHANNEL {
     wchar_t ChannelName[128];
     PCHATP_MESSAGE Messages;
     WORD32 MessageCount;
+    
+    WORD64 ChannelCryptorKeys[4];
 }CHATP_CHANNEL, *PCHATP_CHANNEL;
 
 typedef struct _CHATP_REQUEST {
@@ -46,11 +48,19 @@ void ChatpInit(void);
 void ChatpShutdown(void);
 
 void ChatpUpdateContext(void);
+void ChatpMiscEventHandler(int i);
 
-void ChatpSendMessage(wchar_t* Message);
+void ChatpSendMessage(PCHATP_CHANNEL Channel, wchar_t* Message);
 void ChatpAddUsername(wchar_t* Username);
 void ChatpCloseChannel(PCHATP_CHANNEL Channel);
 void ChatpDeleteMessage(PCHATP_MESSAGE Message);
 void ChatpUpdateMessage(PCHATP_MESSAGE Message, wchar_t* MessageBody);
+
+void ChatpHandler_Yes(void* _Event);
+void ChatpHandler_RecvLogin(void* _Event);
+void ChatpHandler_Message(void* _Event);
+void ChatpHandler_RecvMsgUpdate(void* _Event);
+void ChatpHandler_RecvMsgDelete(void* _Event);
+void ChatpHandler_RecvChannels(void* _Event);
 
 #endif /* chatp_h */
