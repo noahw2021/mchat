@@ -89,9 +89,14 @@ typedef struct _CHAT_RECVUSERNAME {
 }CHAT_RECVUSERNAME, *PCHAT_RECVUSERNAME;
 
 typedef struct _CHAT_MESSAGE {
-    wchar_t ChatMessage[2048];
+    union {
+        wchar_t ChatMessage[2048];
+        WORD64 ChatMessageRaw[256];
+    };
+    
     WORD64 AuthorID[4];
-    WORD64 MessageId[2];
+    WORD64 MessageID[2];
+    WORD64 ChannelID[2];
     time_t Sent;
 }CHAT_MESSAGE, *PCHAT_MESSAGE;
 
