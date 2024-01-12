@@ -29,6 +29,8 @@ typedef struct _CHATP_CHANNEL {
     WORD64 ChannelID[2];
     
     WORD64 ChannelCryptorKeys[4];
+    wchar_t ChannelMOTD[256];
+    time_t ChannelCreated;
 }CHATP_CHANNEL, *PCHATP_CHANNEL;
 
 typedef struct _CHATP_REQUEST {

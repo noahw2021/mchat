@@ -54,6 +54,10 @@ typedef struct _CHAT_CHANNELRECV {
     WORD64 ChannelID[2];
     WORD64 ChannelCryptor[4];
     WORD64 LastMessageID[2];
+    
+    time_t UserRegister;
+    wchar_t UserMOTD[256];
+    time_t ChannelCreated;
 }CHAT_CHANNELRECV, *PCHAT_CHANNELRECV;
 
 typedef struct _CHAT_REGISTER {

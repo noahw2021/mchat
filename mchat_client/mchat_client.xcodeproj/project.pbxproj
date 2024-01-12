@@ -20,6 +20,9 @@
 		8C6A40542B518B5800BABD9C /* chatp_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40532B518B5800BABD9C /* chatp_init.c */; };
 		8C6A40562B518B6800BABD9C /* chatp_context.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40552B518B6800BABD9C /* chatp_context.c */; };
 		8C6A40582B518BA200BABD9C /* chatp_send.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40572B518BA200BABD9C /* chatp_send.c */; };
+		8C6A405E2B51DB6800BABD9C /* panes_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A405D2B51DB6800BABD9C /* panes_init.c */; };
+		8C6A40602B51DB8600BABD9C /* panes_channel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A405F2B51DB8600BABD9C /* panes_channel.c */; };
+		8C6A40622B51DB8F00BABD9C /* panes_input.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40612B51DB8F00BABD9C /* panes_input.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +57,10 @@
 		8C6A40532B518B5800BABD9C /* chatp_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_init.c; sourceTree = "<group>"; };
 		8C6A40552B518B6800BABD9C /* chatp_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_context.c; sourceTree = "<group>"; };
 		8C6A40572B518BA200BABD9C /* chatp_send.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = chatp_send.c; sourceTree = "<group>"; };
+		8C6A405C2B51DADA00BABD9C /* panes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = panes.h; sourceTree = "<group>"; };
+		8C6A405D2B51DB6800BABD9C /* panes_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_init.c; sourceTree = "<group>"; };
+		8C6A405F2B51DB8600BABD9C /* panes_channel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_channel.c; sourceTree = "<group>"; };
+		8C6A40612B51DB8F00BABD9C /* panes_input.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_input.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +121,7 @@
 		8C6A40452B4F3AA600BABD9C /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				8C6A405B2B51DAD300BABD9C /* panes */,
 				8C6A40462B4F3ACA00BABD9C /* ui.h */,
 				8C6A40472B4F3AD200BABD9C /* ui_main.c */,
 				8C6A40492B517FE100BABD9C /* ui_terminal.c */,
@@ -130,6 +138,17 @@
 				8C6A40572B518BA200BABD9C /* chatp_send.c */,
 			);
 			path = chatp;
+			sourceTree = "<group>";
+		};
+		8C6A405B2B51DAD300BABD9C /* panes */ = {
+			isa = PBXGroup;
+			children = (
+				8C6A405C2B51DADA00BABD9C /* panes.h */,
+				8C6A405D2B51DB6800BABD9C /* panes_init.c */,
+				8C6A405F2B51DB8600BABD9C /* panes_channel.c */,
+				8C6A40612B51DB8F00BABD9C /* panes_input.c */,
+			);
+			path = panes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,9 +208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6A40602B51DB8600BABD9C /* panes_channel.c in Sources */,
 				8C6A40482B4F3AD200BABD9C /* ui_main.c in Sources */,
 				8C6A404A2B517FE100BABD9C /* ui_terminal.c in Sources */,
 				8C6A40422B4F376100BABD9C /* netw_base64.c in Sources */,
+				8C6A40622B51DB8F00BABD9C /* panes_input.c in Sources */,
 				8C6A40502B5181BF00BABD9C /* chat_init.c in Sources */,
 				8C6A40582B518BA200BABD9C /* chatp_send.c in Sources */,
 				8C6A404E2B51813A00BABD9C /* netw_curlapi.c in Sources */,
@@ -202,6 +223,7 @@
 				8C6A404C2B51813200BABD9C /* netw_init.c in Sources */,
 				8C15BC412B42781F007D5FE3 /* main.c in Sources */,
 				8C6A403E2B4D9BE700BABD9C /* chat_recvevents.c in Sources */,
+				8C6A405E2B51DB6800BABD9C /* panes_init.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

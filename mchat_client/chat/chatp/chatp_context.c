@@ -243,6 +243,8 @@ void ChatpHandler_RecvChannels(void* _Event) {
     wcscpy(NewChannel->ChannelName, Event->ChannelName);
     memcpy(NewChannel->ChannelID, Event->ChannelID,
         sizeof(WORD64) * 2);
+    NewChannel->ChannelCreated = Event->ChannelCreated;
+    wcscpy(NewChannel->ChannelMOTD, Event->UserMOTD);
     
     // Request the last 50 messages
     PCHAT_REQUESTMSGS MessageRequest =
