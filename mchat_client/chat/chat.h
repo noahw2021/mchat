@@ -99,6 +99,7 @@ typedef struct _CHAT_MESSAGE {
     WORD64 MessageID[2];
     WORD64 ChannelID[2];
     time_t Sent;
+    time_t LastEdited;
 }CHAT_MESSAGE, *PCHAT_MESSAGE;
 
 typedef struct _CHAT_MESSAGEUPDATERECV {

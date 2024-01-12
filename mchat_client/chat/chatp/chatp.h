@@ -16,7 +16,9 @@ typedef struct _CHATP_MESSAGE {
     wchar_t Message[2048];
     wchar_t AuthorName[128];
     WORD64 MessageId[2];
+    WORD64 ChannelID[2];
     time_t SendTime;
+    time_t LastModified;
 }CHATP_MESSAGE, *PCHATP_MESSAGE;
 
 typedef struct _CHATP_CHANNEL {
