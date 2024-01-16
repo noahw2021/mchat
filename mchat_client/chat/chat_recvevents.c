@@ -61,10 +61,6 @@ void* ChatiGetEvent(int i) {
     return Buffer;
 }
 
-PCHAT_YES ChatGetEventAsYes(int i) {
-    return ChatiGetEvent(i);
-}
-
 PCHAT_MESSAGE ChatGetEventAsMessage(int i) {
     return ChatiGetEvent(i);
 }

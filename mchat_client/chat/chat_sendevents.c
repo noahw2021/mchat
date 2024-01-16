@@ -89,3 +89,7 @@ void ChatEventSendLogin(PCHAT_LOGIN Event) {
     
     return;
 }
+
+void ChatEventSendYes(PCHAT_YES Event) {
+    return;
+}

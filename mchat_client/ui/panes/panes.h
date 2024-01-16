@@ -10,6 +10,7 @@
 
 // Chat context structures
 #include "../../chat/chatp/chatp.h"
+#include <time.h>
 
 typedef struct _UIPCTX {
     int CurrentRenderingPane;
@@ -27,5 +28,7 @@ void UipRenderRequests(PCHATP_REQUEST Requests, WORD32 Count);
 
 void UispInputHandler(void);
 void UispMessageRenderer(PCHATP_MESSAGE Message);
+void UispRenderNewMessage(wchar_t* Author, wchar_t* Message,
+    time_t SendDate);
 
 #endif /* panes_h */

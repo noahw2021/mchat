@@ -34,8 +34,10 @@ typedef struct _CHATP_CHANNEL {
 }CHATP_CHANNEL, *PCHATP_CHANNEL;
 
 typedef struct _CHATP_REQUEST {
+    WORD64 TheirID[4];
     wchar_t Username[128];
     time_t Sent;
+    BYTE Active;
 }CHATP_REQUEST, *PCHATP_REQUEST;
 
 typedef struct _CHATP_CTX {
@@ -69,5 +71,7 @@ void ChatpHandler_RecvMsgUpdate(void* _Event);
 void ChatpHandler_RecvMsgDelete(void* _Event);
 void ChatpHandler_RecvChannels(void* _Event);
 void ChatpHandler_RecvUsername(void* _Event);
+void ChatpHandler_RecvRejected(void* _Event);
+void ChatpHandler_RecvMyRequests(void* _Event);
 
 #endif /* chatp_h */

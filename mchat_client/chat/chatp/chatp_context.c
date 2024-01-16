@@ -41,6 +41,12 @@ void ChatpUpdateContext(void) {
             case CHATEVENTTYPE_RECVCHANNELS:
                 ChatpHandler_RecvChannels(_Event);
                 break;
+            case CHATEVENTTYPE_RECVREJECT:
+                ChatpHandler_RecvRejected(_Event);
+                break;
+            case CHATEVENTTYPE_RECVMYREQUSTZ:
+                ChatpHandler_RecvMyRequests(_Event);
+                break;
             default:
                 fprintf(stderr,
                     "Unknown event type recieved.\n");
@@ -261,6 +267,49 @@ void ChatpHandler_RecvChannels(void* _Event) {
     free(MessageRequest);
     
     // Free the event as we own it
+    free(Event);
+    return;
+}
+
+
+void ChatpHandler_RecvRejected(void* _Event) {
+    PCHAT_REJECTED Event = _Event;
+    
+    for (int i = 0; i < ChatpCtx->RequestCount; i++) {
+        PCHATP_REQUEST ThisRequest = &ChatpCtx->Requests[i];
+        if (ThisRequest->TheirID[0] == Event->TheirID[0] &&
+            ThisRequest->TheirID[1] == Event->TheirID[1] &&
+            ThisRequest->TheirID[2] == Event->TheirID[2] &&
+            ThisRequest->TheirID[3] == Event->TheirID[3]
+        ) {
+            ThisRequest->Active = 0;
+            break;
+        }
+    }
+    
+    free(Event);
+    return;
+}
+
+void ChatpHandler_RecvMyRequests(void* _Event) {
+    PCHAT_MYREQUESTS Event = _Event;
+    
+    if (!ChatpCtx->Requests) {
+        ChatpCtx->Requests = malloc(sizeof(CHATP_REQUEST));
+    } else {
+        ChatpCtx->Requests = realloc(ChatpCtx->Requests,
+            sizeof(CHATP_REQUEST) * (ChatpCtx->RequestCount + 1));
+    }
+    
+    PCHATP_REQUEST NewReq = &ChatpCtx->Requests[ChatpCtx->RequestCount];
+    memset(NewReq, 0, sizeof(CHATP_REQUEST));
+    ChatpCtx->RequestCount++;
+    
+    NewReq->Active = 1;
+    NewReq->Sent = Event->Sent;
+    memcpy(NewReq->TheirID, Event->TheirID, sizeof(WORD64) * 4);
+    wcslcpy(NewReq->Username, Event->TheirUsername, 128);
+    
     free(Event);
     return;
 }

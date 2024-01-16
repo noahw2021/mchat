@@ -15,6 +15,7 @@
 #define PANE_CHANNEL  1
 #define PANE_REQUESTS 2
 #define PANE_USERINFO 3
+#define PANE_FRIENDS  4
 
 typedef struct _UI_CTX {
     void* Threads;

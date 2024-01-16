@@ -129,6 +129,21 @@ typedef struct _CHAT_REQUESTMSGS {
     WORD64 MessagesToRequest;
 }CHAT_REQUESTMSGS, *PCHAT_REQUESTMSGS;
 
+typedef struct _CHAT_REJECT {
+    WORD64 TheirID[4];
+    WORD64 MyID[4];
+}CHAT_REJECT, *PCHAT_REJECT;
+
+typedef struct _CHAT_REJECTED {
+    WORD64 TheirID[4];
+}CHAT_REJECTED, *PCHAT_REJECTED;
+
+typedef struct _CHAT_MYREQUESTS {
+    WORD64 TheirID[4];
+    wchar_t TheirUsername[128];
+    time_t Sent;
+}CHAT_MYREQUESTS, *PCHAT_MYREQUESTS;
+
 // largest buffer reciept
 #define CHATSZ_MAX sizeof(CHAT_MESSAGE) + 1024
 
@@ -153,18 +168,21 @@ extern PCHAT_CTX ChatCtx;
 #define CHATEVENTTYPE_RECVMSGUPDATE 0x05
 #define CHATEVENTTYPE_RECVMSGDELETE 0x06
 #define CHATEVENTTYPE_RECVCHANNELS  0x07
+#define CHATEVENTTYPE_RECVREJECT    0x08
+#define CHATEVENTTYPE_RECVMYREQUSTZ 0x09
 
 int ChatGetEventList(void);
 int ChatGetEventTypes(int i);
 void* ChatiGetEvent(int i);
 
-PCHAT_YES          ChatGetEventAsYes(int i);
 PCHAT_MESSAGE      ChatGetEventAsMessage(int i);
 PCHAT_RECVUSERNAME ChatGetEventAsRecvUsername(int i);
 PCHAT_LOGINRECV    ChatGetEventAsRecvLogin(int i);
 PCHAT_MESSAGEDELETERECV ChatGetEventAsRecvMessageDelete(int i);
 PCHAT_MESSAGEUPDATERECV ChatGetEventAsRecvMessageUpdate(int i);
 PCHAT_CHANNELRECV       ChatGetEventAsRecvChannels(int i);
+PCHAT_REJECTED          ChatGetEventAsRejected(int i);
+PCHAT_MYREQUESTS        ChatGetEventAsMyRequests(int i);
 
 void ChatEventSendRegister(PCHAT_REGISTER Event);
 void ChatEventSendHello(PCHAT_HELLO Event);
@@ -173,5 +191,6 @@ void ChatEventSendMessage(PCHAT_MESSAGE Event);
 void ChatEventSendLogin(PCHAT_LOGIN Event);
 void ChatEventSendMessageUpdate(PCHAT_MESSAGEUPDATE Event);
 void ChatEventSendMessageRequest(PCHAT_REQUESTMSGS Event);
+void ChatEventSendYes(PCHAT_YES Event);
 
 #endif /* chat_h */
