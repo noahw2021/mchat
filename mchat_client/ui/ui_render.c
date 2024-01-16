@@ -20,7 +20,7 @@ void UiRender(void) {
     int InputHeight = (2048 / w) + 1;
     UiCtx->InputBufferHeight = InputHeight;
     pthread_mutex_unlock(&UiCtx->AccessMutex);
-    UiiSetPos(0, InputHeight);
+    UiiSetPos(0, InputHeight - 1);
     // draw white on top of the input bar
     UiiPushColor(UIICOLOR_WHITEBG);
     for (int i = 0; i < w; i++)
