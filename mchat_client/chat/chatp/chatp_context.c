@@ -11,6 +11,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
 
 void ChatpUpdateContext(void) {
     int UnreadEvents = ChatGetEventList();
@@ -313,3 +314,13 @@ void ChatpHandler_RecvMyRequests(void* _Event) {
     free(Event);
     return;
 }
+
+void ChatpHandler_RecvUsername(void* _Event) {
+    PCHAT_RECVUSERNAME Event = _Event;
+    wcslcpy(ChatpCtx->LastReturnedUsername, Event->RecieptUsername, 64);
+    memcpy(ChatpCtx->LastRecvID, Event->ReceiptID, sizeof(WORD64) * 4);
+    
+    free(Event);
+    return;
+}
+

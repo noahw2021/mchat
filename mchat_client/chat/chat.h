@@ -192,5 +192,6 @@ void ChatEventSendLogin(PCHAT_LOGIN Event);
 void ChatEventSendMessageUpdate(PCHAT_MESSAGEUPDATE Event);
 void ChatEventSendMessageRequest(PCHAT_REQUESTMSGS Event);
 void ChatEventSendYes(PCHAT_YES Event);
+void ChatEventSendReject(PCHAT_REJECT Event);
 
 #endif /* chat_h */

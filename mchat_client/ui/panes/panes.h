@@ -14,6 +14,8 @@
 
 typedef struct _UIPCTX {
     int CurrentRenderingPane;
+    PCHATP_CHANNEL ActiveChannel;
+    PCHATP_MESSAGE EditingMessage;
 }UIPCTX, *PUIPCTX;
 extern PUIPCTX UipCtx;
 

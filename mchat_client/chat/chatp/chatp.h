@@ -49,6 +49,10 @@ typedef struct _CHATP_CTX {
     
     PCHATP_MESSAGE* Messages;
     WORD32 MessageCount;
+    
+    WORD64 LastRecvID[4];
+    wchar_t LastReturnedUsername[128];
+    unsigned char UsernameFlag;
 }CHATP_CTX, *PCHATP_CTX;
 extern PCHATP_CTX ChatpCtx;
 

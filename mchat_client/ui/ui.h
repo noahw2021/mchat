@@ -20,6 +20,7 @@
 typedef struct _UI_CTX {
     void* Threads;
     pthread_mutex_t AccessMutex;
+    pthread_mutex_t TextPrintMutex;
     
     BYTE WantsShutdown;
     
