@@ -125,7 +125,9 @@ void UispInputHandler(void) {
         } else if (!wcscmp(Command, L"d")) {
             int Counter = 0;
             long Argument = wcstol(Command + 2, NULL, 10);
-            for (long i = (ChatpCtx->MessageCount - 1); i != 0; i--) {
+            for (int i = 0; i < UipCtx->ActiveChannel->MessageCount; 
+                 i++
+            ) {
                 PCHATP_MESSAGE ThisMsg = ChatpCtx->Messages[i];
                 if (ThisMsg->ChannelID[0] !=
                     UipCtx->ActiveChannel->ChannelID[0] ||
@@ -154,7 +156,9 @@ void UispInputHandler(void) {
         } else if (!wcscmp(Command, L"e")) {
             int Counter = 0;
             long Argument = wcstol(Command + 2, NULL, 10);
-            for (long i = (ChatpCtx->MessageCount - 1); i != 0; i--) {
+            for (int i = 0; i < UipCtx->ActiveChannel->MessageCount;
+                 i++
+            ) {
                 PCHATP_MESSAGE ThisMsg = ChatpCtx->Messages[i];
                 if (ThisMsg->ChannelID[0] !=
                     UipCtx->ActiveChannel->ChannelID[0] ||

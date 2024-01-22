@@ -6,3 +6,11 @@
 //
 
 #include "panes.h"
+#include "../ui.h"
+
+void UipRenderChannel(PCHATP_CHANNEL Channel) {
+    int ConsoleWidth, ConsoleHeight;
+    UiiGetSize(&ConsoleWidth, &ConsoleHeight);
+
+    
+}
