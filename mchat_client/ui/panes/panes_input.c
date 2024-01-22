@@ -137,6 +137,13 @@ void UispInputHandler(void) {
                     continue;
                 }
                 
+                if (!wcscmp(ThisMsg->AuthorName, UipCtx->MyUsername)) {
+                    UispRenderNewMessage(L"System",
+                        L"You cannot delete this message.", time(NULL));
+                    
+                    return;
+                }
+                
                 Counter++;
                 if (Counter == Argument) {
                     ThisMsg->WasMessageDeleted = 1;
@@ -170,6 +177,13 @@ void UispInputHandler(void) {
                 
                 Counter++;
                 if (Counter == Argument) {
+                    if (!wcscmp(ThisMsg->AuthorName, UipCtx->MyUsername)) {
+                        UispRenderNewMessage(L"System",
+                            L"You cannot edit this message.", time(NULL));
+                        
+                        return;
+                    }
+                    
                     UipCtx->EditingMessage = ThisMsg;
                     wchar_t* EditMsg = malloc(sizeof(wchar_t) * 128);
                     

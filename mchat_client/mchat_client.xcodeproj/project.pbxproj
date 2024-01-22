@@ -24,7 +24,7 @@
 		8C6A40602B51DB8600BABD9C /* panes_channel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A405F2B51DB8600BABD9C /* panes_channel.c */; };
 		8C6A40622B51DB8F00BABD9C /* panes_input.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40612B51DB8F00BABD9C /* panes_input.c */; };
 		8C6A40642B51DF9B00BABD9C /* ui_render.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40632B51DF9B00BABD9C /* ui_render.c */; };
-		8CF4720D2B5EAEE50077A898 /* pane_messages.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CF4720C2B5EAEE50077A898 /* pane_messages.c */; };
+		8CF4720D2B5EAEE50077A898 /* panes_messages.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CF4720C2B5EAEE50077A898 /* panes_messages.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,7 +64,7 @@
 		8C6A405F2B51DB8600BABD9C /* panes_channel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_channel.c; sourceTree = "<group>"; };
 		8C6A40612B51DB8F00BABD9C /* panes_input.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_input.c; sourceTree = "<group>"; };
 		8C6A40632B51DF9B00BABD9C /* ui_render.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ui_render.c; sourceTree = "<group>"; };
-		8CF4720C2B5EAEE50077A898 /* pane_messages.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pane_messages.c; sourceTree = "<group>"; };
+		8CF4720C2B5EAEE50077A898 /* panes_messages.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_messages.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +152,7 @@
 				8C6A405D2B51DB6800BABD9C /* panes_init.c */,
 				8C6A405F2B51DB8600BABD9C /* panes_channel.c */,
 				8C6A40612B51DB8F00BABD9C /* panes_input.c */,
-				8CF4720C2B5EAEE50077A898 /* pane_messages.c */,
+				8CF4720C2B5EAEE50077A898 /* panes_messages.c */,
 			);
 			path = panes;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 				8C6A40602B51DB8600BABD9C /* panes_channel.c in Sources */,
 				8C6A40482B4F3AD200BABD9C /* ui_main.c in Sources */,
 				8C6A404A2B517FE100BABD9C /* ui_terminal.c in Sources */,
-				8CF4720D2B5EAEE50077A898 /* pane_messages.c in Sources */,
+				8CF4720D2B5EAEE50077A898 /* panes_messages.c in Sources */,
 				8C6A40422B4F376100BABD9C /* netw_base64.c in Sources */,
 				8C6A40642B51DF9B00BABD9C /* ui_render.c in Sources */,
 				8C6A40622B51DB8F00BABD9C /* panes_input.c in Sources */,

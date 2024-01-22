@@ -11,6 +11,7 @@
 // Chat context structures
 #include "../../chat/chatp/chatp.h"
 #include <time.h>
+#include <pthread.h>
 
 typedef struct _UI_MESSAGE {
     wchar_t* Author;
@@ -22,9 +23,11 @@ typedef struct _UIPCTX {
     int CurrentRenderingPane;
     PCHATP_CHANNEL ActiveChannel;
     PCHATP_MESSAGE EditingMessage;
+    wchar_t MyUsername[128];
     
     PUI_MESSAGE Messages;
     WORD32 MessageCount;
+    pthread_mutex_t MessageMutex;
 }UIPCTX, *PUIPCTX;
 extern PUIPCTX UipCtx;
 
