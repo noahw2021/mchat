@@ -1,5 +1,5 @@
 //
-//  pan_messages.c
+//  pane_messages.c
 //  mchat_client
 //
 //  Created by Noah Wooten on 1/22/24.

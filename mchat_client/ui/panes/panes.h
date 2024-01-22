@@ -12,10 +12,19 @@
 #include "../../chat/chatp/chatp.h"
 #include <time.h>
 
+typedef struct _UI_MESSAGE {
+    wchar_t* Author;
+    wchar_t* Body;
+    time_t TimeSent;
+}UI_MESSAGE, *PUI_MESSAGE;
+
 typedef struct _UIPCTX {
     int CurrentRenderingPane;
     PCHATP_CHANNEL ActiveChannel;
     PCHATP_MESSAGE EditingMessage;
+    
+    PUI_MESSAGE Messages;
+    WORD32 MessageCount;
 }UIPCTX, *PUIPCTX;
 extern PUIPCTX UipCtx;
 
@@ -29,7 +38,6 @@ void UipRenderUserInfo(PCHATP_CHANNEL Channel);
 void UipRenderRequests(PCHATP_REQUEST Requests, WORD32 Count);
 
 void UispInputHandler(void);
-void UispMessageRenderer(PCHATP_MESSAGE Message);
 void UispRenderNewMessage(wchar_t* Author, wchar_t* Message,
     time_t SendDate);
 
