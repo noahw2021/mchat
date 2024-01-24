@@ -7,6 +7,7 @@
 
 #include "netw.h"
 #include <stdlib.h>
+#include <curl/curl.h>
 
 char* NetwGETApi(char* Endpoint) {
     return NULL;

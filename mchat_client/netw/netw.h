@@ -9,6 +9,14 @@
 #define netw_h
 
 #include "../types.h"
+#include <curl/curl.h>
+
+typedef struct _NET_CTX {
+    int LastErrorNumber;
+    CURL* ThisCurlCtx;
+    
+}NET_CTX, *PNET_CTX;
+extern PNET_CTX NetCtx;
 
 void NetwInit(void);
 void NetwShutdown(void);
@@ -25,5 +33,12 @@ void NetwDecrypt256(void* Buffer, unsigned long BufferSize,
 
 char* NetwGETApi(char* Endpoint);
 void NetwPOSTApi(char* Endpoint, char* Data);
+int NetwGetLastError(void);
+
+#define NETW_ERROR_NOTAUTHORIZED  0x01
+#define NETW_ERROR_INVALIDREQUEST 0x02
+#define NETW_ERROR_NORESPONSE     0x03
+#define NETW_ERROR_TIMEOUT        0x04
+#define NETW_ERROR_METHNOTALLOWED 0x05
 
 #endif /* netw_h */
