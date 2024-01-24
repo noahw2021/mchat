@@ -172,7 +172,7 @@ extern PCHAT_CTX ChatCtx;
 #define CHATEVENTTYPE_RECVMYREQUSTZ 0x09
 
 int ChatGetEventList(void);
-int ChatGetEventTypes(int i);
+int ChatGetEventType(int i);
 void* ChatiGetEvent(int i);
 
 PCHAT_MESSAGE      ChatGetEventAsMessage(int i);

@@ -5,4 +5,15 @@
 //  Created by Noah Wooten on 1/24/24.
 //
 
-#include <stdio.h>
+#include "panes.h"
+
+void UipRenderRequests(PCHATP_REQUEST Requests, 
+    WORD32 Count
+) {
+    return;
+}
+
+
+void UipRenderUserInfo(PCHATP_CHANNEL Channel) {
+    return;
+}

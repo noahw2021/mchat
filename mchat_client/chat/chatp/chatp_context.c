@@ -17,7 +17,7 @@ void ChatpUpdateContext(void) {
     int UnreadEvents = ChatGetEventList();
     
     for (int i = 0; i < UnreadEvents; i++) {
-        int ThisEventType = ChatGetEventTypes(i);
+        int ThisEventType = ChatGetEventType(i);
         void* _Event = ChatiGetEvent(i);
         
         switch (ThisEventType) {

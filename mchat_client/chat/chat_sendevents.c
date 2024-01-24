@@ -93,3 +93,17 @@ void ChatEventSendLogin(PCHAT_LOGIN Event) {
 void ChatEventSendYes(PCHAT_YES Event) {
     return;
 }
+
+void ChatEventSendMessageRequest(PCHAT_REQUESTMSGS Event) {
+    return;
+}
+
+void ChatEventSendMessageUpdate(PCHAT_MESSAGEUPDATE Event) {
+    return;
+}
+
+void ChatEventSendReject(PCHAT_REJECT Event) {
+    return;
+}
+
+
