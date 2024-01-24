@@ -26,8 +26,6 @@
 		8C6A40642B51DF9B00BABD9C /* ui_render.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6A40632B51DF9B00BABD9C /* ui_render.c */; };
 		8CDEE6C52B6153B20098A713 /* panes_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6C42B6153B20098A713 /* panes_misc.c */; };
 		8CDEE6CA2B6154670098A713 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDEE6C72B61540E0098A713 /* libcurl.tbd */; };
-		8CDEE6CE2B61561B0098A713 /* platform_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6CD2B61561B0098A713 /* platform_init.c */; };
-		8CDEE6D02B6156220098A713 /* platform_report.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6CF2B6156220098A713 /* platform_report.c */; };
 		8CF4720D2B5EAEE50077A898 /* panes_messages.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CF4720C2B5EAEE50077A898 /* panes_messages.c */; };
 /* End PBXBuildFile section */
 
@@ -72,9 +70,6 @@
 		8CDEE6C72B61540E0098A713 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		8CDEE6C82B61541A0098A713 /* libcurl.3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.3.tbd; path = usr/lib/libcurl.3.tbd; sourceTree = SDKROOT; };
 		8CDEE6C92B61541D0098A713 /* libcurl.4.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.4.tbd; path = usr/lib/libcurl.4.tbd; sourceTree = SDKROOT; };
-		8CDEE6CC2B6156110098A713 /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = platform.h; sourceTree = "<group>"; };
-		8CDEE6CD2B61561B0098A713 /* platform_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = platform_init.c; sourceTree = "<group>"; };
-		8CDEE6CF2B6156220098A713 /* platform_report.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = platform_report.c; sourceTree = "<group>"; };
 		8CF4720C2B5EAEE50077A898 /* panes_messages.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = panes_messages.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +109,6 @@
 		8C15BC432B427825007D5FE3 /* netw */ = {
 			isa = PBXGroup;
 			children = (
-				8CDEE6CB2B61560A0098A713 /* platform */,
 				8C15BC4C2B427AAD007D5FE3 /* netw.h */,
 				8C6A40412B4F376100BABD9C /* netw_base64.c */,
 				8C6A40432B4F377E00BABD9C /* netw_crypto.c */,
@@ -180,16 +174,6 @@
 				8CDEE6C72B61540E0098A713 /* libcurl.tbd */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8CDEE6CB2B61560A0098A713 /* platform */ = {
-			isa = PBXGroup;
-			children = (
-				8CDEE6CC2B6156110098A713 /* platform.h */,
-				8CDEE6CD2B61561B0098A713 /* platform_init.c */,
-				8CDEE6CF2B6156220098A713 /* platform_report.c */,
-			);
-			path = platform;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +245,6 @@
 				8C6A40582B518BA200BABD9C /* chatp_send.c in Sources */,
 				8C6A404E2B51813A00BABD9C /* netw_curlapi.c in Sources */,
 				8C6A40542B518B5800BABD9C /* chatp_init.c in Sources */,
-				8CDEE6D02B6156220098A713 /* platform_report.c in Sources */,
-				8CDEE6CE2B61561B0098A713 /* platform_init.c in Sources */,
 				8C6A40442B4F377E00BABD9C /* netw_crypto.c in Sources */,
 				8C6A40402B4F35C300BABD9C /* chat_sendevents.c in Sources */,
 				8C6A40562B518B6800BABD9C /* chatp_context.c in Sources */,
