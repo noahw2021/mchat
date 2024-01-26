@@ -299,18 +299,69 @@ void HttpRqe_ServeCode(WORD64 Request, int Code) {
     
     pthread_mutex_lock(&HttpCtx->RequestsMutex);
     PHTTP_REQUEST ThisRequest = HttpCtx->Requests[Request];
-    
     pthread_mutex_unlock(&HttpCtx->RequestsMutex);
+    
+    // no mutex required because only one thread can access request
+    
+    ThisRequest->ReturnCode = Code;
+    return;
 }
 
 void HttpRqe_ServeStatus(WORD64 Request, char* Status) {
+    if (!HttpCtx)
+        return;
     
+    if (Request >= HttpCtx->RequestCount)
+        return;
+    
+    pthread_mutex_lock(&HttpCtx->RequestsMutex);
+    PHTTP_REQUEST ThisRequest = HttpCtx->Requests[Request];
+    pthread_mutex_unlock(&HttpCtx->RequestsMutex);
+    
+    // no mutex required because only one thread can access request
+    if (ThisRequest->ReturnString)
+        free(ThisRequest->ReturnString);
+    
+    ThisRequest->ReturnString = malloc(strlen(Status) + 1);
+    strcpy(ThisRequest->ReturnString, Status);
+    
+    return;
 }
 
 void HttpRqe_ServeResponse(WORD64 Request, char* Response) {
+    if (!HttpCtx)
+        return;
     
+    if (Request >= HttpCtx->RequestCount)
+        return;
+    
+    pthread_mutex_lock(&HttpCtx->RequestsMutex);
+    PHTTP_REQUEST ThisRequest = HttpCtx->Requests[Request];
+    pthread_mutex_unlock(&HttpCtx->RequestsMutex);
+    
+    // no mutex required because only one thread can access request
+    if (ThisRequest->ReturnString)
+        free(ThisRequest->ReturnString);
+    
+    ThisRequest->ResponseBuffer = malloc(strlen(Response) + 1);
+    strcpy(ThisRequest->ResponseBuffer, Response);
+    
+    return;
 }
 
 void HttpRqe_Close(WORD64 Request) {
+    if (!HttpCtx)
+        return;
     
+    if (Request >= HttpCtx->RequestCount)
+        return;
+    
+    pthread_mutex_lock(&HttpCtx->RequestsMutex);
+    PHTTP_REQUEST ThisRequest = HttpCtx->Requests[Request];
+    pthread_mutex_unlock(&HttpCtx->RequestsMutex);
+    
+    // no mutex required because only one thread can access request
+    ThisRequest->RequestCompleted = 1;
+    
+    return;
 }
