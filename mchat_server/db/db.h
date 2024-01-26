@@ -8,5 +8,6 @@
 #ifndef db_h
 #define db_h
 
+#include "../types.h"
 
 #endif /* db_h */

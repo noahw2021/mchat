@@ -8,5 +8,6 @@
 #ifndef app_h
 #define app_h
 
+#include "../types.h"
 
 #endif /* app_h */

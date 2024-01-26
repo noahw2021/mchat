@@ -44,6 +44,7 @@
 		8CDEE6EB2B63F6F70098A713 /* dbint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dbint.h; sourceTree = "<group>"; };
 		8CDEE6EC2B63F7040098A713 /* app_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = app_init.c; sourceTree = "<group>"; };
 		8CDEE6EE2B63F7100098A713 /* db_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_init.c; sourceTree = "<group>"; };
+		8CDEE6F02B63F8290098A713 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,7 @@
 		8C15BC272B4277F3007D5FE3 = {
 			isa = PBXGroup;
 			children = (
+				8CDEE6F02B63F8290098A713 /* types.h */,
 				8CDEE6DE2B63F6980098A713 /* main.c */,
 				8CDEE6D42B63F6370098A713 /* app */,
 				8CDEE6D32B63F62A0098A713 /* db */,

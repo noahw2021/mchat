@@ -8,5 +8,6 @@
 #ifndef crypt_h
 #define crypt_h
 
+#include "../types.h"
 
 #endif /* crypt_h */

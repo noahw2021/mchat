@@ -8,5 +8,6 @@
 #ifndef dbint_h
 #define dbint_h
 
+#include "../../types.h"
 
 #endif /* dbint_h */
