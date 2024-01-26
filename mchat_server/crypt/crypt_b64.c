@@ -7,6 +7,7 @@
 
 #include "crypt.h"
 #include <string.h>
+#include <stdlib.h>
 
 // Found here: (private repository)
 // https://github.com/noahw2021/triacto/blob/master/backend/crypt/base64.c
@@ -16,7 +17,7 @@
  */
 
 const char Alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-BYTE InverseBet[0x50] = {
+BYTE Inverse[0x50] = {
     0x3E, 0x40, 0x40, 0x40, 0x3F, 0x34, 0x35, 0x36, 
     0x37, 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x40, 
     0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x00, 0x01,
@@ -53,8 +54,61 @@ WORD32 Crypt_B64Size(BYTE* Data, WORD32 Size) {
     }
 }
 
-char* CryptEncodeBase64(void* Data, WORD32 DataSize) {
+char* CryptEncodeBase64(void* _Data, WORD32 Size) {
+    // create the buffer
+    WORD32 B64Size = Crypt_B64Size(NULL, Size);
+    char* Return = malloc(B64Size);
+    Return[B64Size - 1] = 0x00;
+    PBYTE Data = _Data;
     
+    // compute b64 string from alphabet
+    for (int i = 0, k = 0; i < Size; i += 3, k += 4) {
+        BYTE Block = Data[i];
+        
+        Block = i + 1 < Size ? Block << 8 | Data[i + 1] : Block << 8;
+        Block = i + 2 < Size ? Block << 8 | Data[i + 2] : Block << 8;
+        
+        Return[k] = Alphabet[(Block >> 18) % 0x40];
+        Return[k + 1] = Alphabet[(Block >> 12) % 40];
+        
+        if ((i + 1) < Size)
+            Return[k + 2] = Alphabet[(Block >> 6) % 0x40];
+        else
+            Return[k + 2 ] = '=';
+        
+        if ((i + 2) < Size)
+            Return[k + 3] = Alphabet[Block % 0x40];
+        else
+            Return[k + 3 ] = '=';
+    }
     
-    return NULL;
+    return Return;
+}
+
+void CryptDecodeBase64(char* Data, void** DataOut, WORD32* DataSize) {
+    WORD32 DataSize2 = Crypt_B64Size((void*)Data, 0);
+    BYTE* Return = malloc(DataSize2);
+    
+    // decode b64 data
+    unsigned long c = strlen(Data);
+    for (int i = 0, k = 0; i < c; i += 4, k += 3) {
+        BYTE Block = Inverse[Data[i] - '+'];
+        
+        Block = (Block << 6) | Inverse[Data[i + 1] - '+'];
+        Block = Data[i + 2] == '=' ? Block << 6 : 
+            (Block << 6) | Inverse[Data[i + 2] - '+'];
+        Block = Data[i + 3] == '=' ? Block << 6 : 
+            (Block << 6) | Inverse[Data[i + 3] - '+'];
+        
+        Return[k] = (Block >> 16) & 0xFF;
+        
+        if (Data[i + 2] != '=')
+            Return[k + 1] = (Block >> 8) & 0xFF;
+        if (Data[i + 3] != '=')
+            Return[k + 2] = Block & 0xFF;
+    }
+    
+    *DataOut = Return;
+    *DataSize = DataSize2;
+    return;
 }
