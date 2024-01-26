@@ -54,6 +54,8 @@ typedef struct _HTTP_REQUEST {
     unsigned char RequestCompleted;
     
     struct MHD_Connection *ThisConnection;
+    char* IncomingData;
+    WORD32 IncomingDataSize;
 }HTTP_REQUEST, *PHTTP_REQUEST;
 
 typedef struct _HTTP_CTX {

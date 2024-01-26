@@ -9,6 +9,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 enum MHD_Result HttpiDaemonAnswer(void* CLS,
     struct MHD_Connection* Connection, const char* URL,
@@ -21,12 +22,17 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
      Return a 503 if we do not have the slots or capacity to
      handle this request.
      */
+    
+    printf("Incoming Request: %s %s.\n", Method, URL);
+    
     if (HttpCtx->RequestCount >= HttpCtx->RequestMax) {
         const char* Response = "OVERLOADED";
         struct MHD_Response* Resp =
             MHD_create_response_from_buffer(strlen(Response),
             (void*)Response, MHD_RESPMEM_PERSISTENT);
         
+        MHD_add_response_header(Resp, "Server",
+                "MothServApp/1.0 GenericApp");
         Return = MHD_queue_response(Connection,
             MHD_HTTP_SERVICE_UNAVAILABLE, Resp);
         MHD_destroy_response(Resp);
@@ -44,6 +50,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
     memset(ThisRequest, 0, sizeof(HTTP_REQUEST));
     // Set the Request ID to a unique number
     ThisRequest->RequestId = HttpCtx->RequestIdCounter;
+    ThisRequest->IncomingData = (char*)Upload;
+    ThisRequest->IncomingDataSize = *UploadSize;
     HttpCtx->RequestIdCounter++;
     
     // Get the IP address of the client
@@ -101,6 +109,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
                 MHD_create_response_from_buffer(strlen(Response),
                                                 (void*)Response, MHD_RESPMEM_PERSISTENT);
                 
+                MHD_add_response_header(Resp, "Server",
+                        "MothServApp/1.0 GenericApp");
                 Return = MHD_queue_response(Connection,
                                             MHD_HTTP_BAD_REQUEST, Resp);
                 MHD_destroy_response(Resp);
@@ -136,6 +146,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
                     MHD_create_response_from_buffer(strlen(Response),
                         (void*)Response, MHD_RESPMEM_PERSISTENT);
                     
+                    MHD_add_response_header(Resp, "Server",
+                            "MothServApp/1.0 GenericApp");
                     Return = MHD_queue_response(Connection,
                         MHD_HTTP_BAD_REQUEST, Resp);
                     MHD_destroy_response(Resp);
@@ -158,7 +170,7 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
 
     int SlashCount = 0;
     char* FullURL = ThisRequest->RequestURL;
-    while (SlashCount != 3) { // take the URL to after the 3rd slash
+    while (SlashCount != 1) { // take the URL to after the 1rd slash
         while (*FullURL != '/')
             FullURL++;
         SlashCount++;
@@ -185,6 +197,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
         MHD_create_response_from_buffer(strlen(Response),
             (void*)Response, MHD_RESPMEM_PERSISTENT);
         
+        MHD_add_response_header(Resp, "Server",
+                "MothServApp/1.0 GenericApp");
         Return = MHD_queue_response(Connection,
             MHD_HTTP_BAD_REQUEST, Resp);
         MHD_destroy_response(Resp);
@@ -230,6 +244,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
                     MHD_create_response_from_buffer(strlen(Response),
                         (void*)Response, MHD_RESPMEM_PERSISTENT);
                     
+                    MHD_add_response_header(Resp, "Server",
+                            "MothServApp/1.0 GenericApp");
                     Return = MHD_queue_response(Connection,
                         MHD_HTTP_BAD_REQUEST, Resp);
                     MHD_destroy_response(Resp);
@@ -255,6 +271,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
         MHD_create_response_from_buffer(strlen(Response),
             (void*)Response, MHD_RESPMEM_PERSISTENT);
         
+        MHD_add_response_header(Resp, "Server",
+                "MothServApp/1.0 GenericApp");
         Return = MHD_queue_response(Connection,
             MHD_HTTP_BAD_REQUEST, Resp);
         MHD_destroy_response(Resp);
@@ -283,6 +301,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
     MHD_create_response_from_buffer(strlen(ThisRequest->ResponseBuffer),
         (void*)ThisRequest->ResponseBuffer, MHD_RESPMEM_PERSISTENT);
     
+    MHD_add_response_header(Resp, "Server",
+            "MothServApp/1.0 GenericApp");
     Return = MHD_queue_response(Connection, ThisRequest->ReturnCode,
         Resp);
     MHD_destroy_response(Resp);

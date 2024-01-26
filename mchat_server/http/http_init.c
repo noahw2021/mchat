@@ -28,7 +28,6 @@ void HttpInit(WORD16 Port) {
     
     for (int i = 0; i < HttpCtx->RequestMax; i++) {
         HttpCtx->Requests[i] = malloc(sizeof(HTTP_REQUEST));
-        memset(&HttpCtx->Requests[i], 0, sizeof(HTTP_REQUEST));
     }
     
     HttpCtx->MyDaemon = MHD_start_daemon(MHD_USE_THREAD_PER_CONNECTION,
