@@ -14,7 +14,10 @@
 typedef struct _NET_CTX {
     int LastErrorNumber;
     CURL* ThisCurlCtx;
+    char* ServerAddress;
     
+    void* LastBuffer_Get;
+    void* LastBuffer_Post;
 }NET_CTX, *PNET_CTX;
 extern PNET_CTX NetCtx;
 
@@ -35,10 +38,12 @@ char* NetwGETApi(char* Endpoint);
 void NetwPOSTApi(char* Endpoint, char* Data);
 int NetwGetLastError(void);
 
+#define NETW_ERROR_SUCCESS        0x00
 #define NETW_ERROR_NOTAUTHORIZED  0x01
 #define NETW_ERROR_INVALIDREQUEST 0x02
 #define NETW_ERROR_NORESPONSE     0x03
 #define NETW_ERROR_TIMEOUT        0x04
 #define NETW_ERROR_METHNOTALLOWED 0x05
+#define NETW_ERROR_ 
 
 #endif /* netw_h */
