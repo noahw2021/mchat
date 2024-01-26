@@ -62,7 +62,7 @@ typedef struct _HTTP_CTX {
     WORD32 EndpointCount;
     
     pthread_mutex_t RequestsMutex;
-    PHTTP_REQUEST Requests;
+    PHTTP_REQUEST* Requests;
     WORD64 RequestCount, RequestMax;
     
     struct MHD_Daemon* MyDaemon;

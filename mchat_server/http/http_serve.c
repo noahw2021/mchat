@@ -38,8 +38,7 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
      Allocate a new requests from the pool, and then increment
      the counter.
      */
-    PHTTP_REQUEST ThisRequest =
-        &HttpCtx->Requests[HttpCtx->RequestCount];
+    PHTTP_REQUEST ThisRequest = HttpCtx->Requests[HttpCtx->RequestCount];
     HttpCtx->RequestCount++;
     
     memset(ThisRequest, 0, sizeof(HTTP_REQUEST));
@@ -50,7 +49,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
     // Get the IP address of the client
     union MHD_ConnectionInfo* ConnInfo;
     ConnInfo = (union MHD_ConnectionInfo*)
-        MHD_get_connection_info(Connection, MHD_CONNECTION_INFO_CLIENT_ADDRESS);
+        MHD_get_connection_info(Connection, 
+        MHD_CONNECTION_INFO_CLIENT_ADDRESS);
     struct sockaddr* ClientSock = ConnInfo->client_addr;
     struct sockaddr_in* ClientSkIn = (struct sockaddr_in*)ClientSock;
     unsigned long IpAddr = ClientSkIn->sin_addr.s_addr;
@@ -78,8 +78,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
                 ThisRequest->Arguments = malloc(sizeof(HTTP_ARGUMENT));
             } else {
                 ThisRequest->Arguments = realloc(ThisRequest->Arguments,
-                                                 sizeof(HTTP_ARGUMENT) *
-                                                 (ThisRequest->ArgumentCount + 1));
+                    sizeof(HTTP_ARGUMENT) *
+                    (ThisRequest->ArgumentCount + 1));
             }
             
             PHTTP_ARGUMENT NewArg =
@@ -166,7 +166,7 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
     
     PHTTP_ENDPOINT TheEndpoint = NULL;
     for (int i = 0; i < HttpCtx->EndpointCount; i++) {
-        PHTTP_ENDPOINT ThisEndpoint = &HttpCtx->Endpoints[i];
+        PHTTP_ENDPOINT ThisEndpoint = HttpCtx->Endpoints[i];
         HTTP_ENDPOINT EndpointData;
         pthread_mutex_lock(&HttpCtx->EndpointsMutex);
         memcpy(&EndpointData, ThisEndpoint, sizeof(HTTP_ENDPOINT));
@@ -288,4 +288,29 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
     MHD_destroy_response(Resp);
     
     return Return;
+}
+
+void HttpRqe_ServeCode(WORD64 Request, int Code) {
+    if (!HttpCtx)
+        return;
+    
+    if (Request >= HttpCtx->RequestCount)
+        return;
+    
+    pthread_mutex_lock(&HttpCtx->RequestsMutex);
+    PHTTP_REQUEST ThisRequest = HttpCtx->Requests[Request];
+    
+    pthread_mutex_unlock(&HttpCtx->RequestsMutex);
+}
+
+void HttpRqe_ServeStatus(WORD64 Request, char* Status) {
+    
+}
+
+void HttpRqe_ServeResponse(WORD64 Request, char* Response) {
+    
+}
+
+void HttpRqe_Close(WORD64 Request) {
+    
 }

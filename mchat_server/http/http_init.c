@@ -24,11 +24,14 @@ void HttpInit(WORD16 Port) {
     
     HttpCtx->RequestMax = 1024;
     HttpCtx->Requests = 
-        malloc(HttpCtx->RequestMax * sizeof(HTTP_REQUEST));
-    memset(HttpCtx->Requests, 0, sizeof(HTTP_REQUEST) * 
-        HttpCtx->RequestMax);
+        malloc(HttpCtx->RequestMax * sizeof(HTTP_REQUEST*));
     
-    HttpCtx->MyDaemon = MHD_start_daemon(MHD_USE_THREAD_PER_CONNECTION, 
+    for (int i = 0; i < HttpCtx->RequestMax; i++) {
+        HttpCtx->Requests[i] = malloc(sizeof(HTTP_REQUEST));
+        memset(&HttpCtx->Requests[i], 0, sizeof(HTTP_REQUEST));
+    }
+    
+    HttpCtx->MyDaemon = MHD_start_daemon(MHD_USE_THREAD_PER_CONNECTION,
         Port, NULL, NULL, &HttpiDaemonAnswer, NULL, MHD_OPTION_END);
     
     if (!HttpCtx->MyDaemon) {
@@ -49,6 +52,8 @@ void HttpShutdown(void) {
     
     for (int i = 0; i < HttpCtx->EndpointCount; i++)
         free(HttpCtx->Endpoints[i]);
+    for (int i = 0; i < HttpCtx->RequestCount; i++)
+        free(HttpCtx->Requests[i]);
     
     if (HttpCtx->Endpoints)
         free(HttpCtx->Endpoints);
