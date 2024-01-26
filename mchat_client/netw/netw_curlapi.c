@@ -45,7 +45,6 @@ char* NetwGETApi(char* Endpoint) {
         &HTTPCode);
     
     switch (HTTPCode) {
-            
         case 400:
             NetCtx->LastErrorNumber = NETW_ERROR_INVALIDREQUEST;
             break;
@@ -61,9 +60,10 @@ char* NetwGETApi(char* Endpoint) {
         case 408:
             NetCtx->LastErrorNumber = NETW_ERROR_TIMEOUT;
             break;
+        case 503:
+            NetCtx->LastErrorNumber = NETW_ERROR_OVERLOADED;
+            break;
     }
-    
-    
     
     return NULL;
 }

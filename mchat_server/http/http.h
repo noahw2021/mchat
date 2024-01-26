@@ -10,23 +10,26 @@
 
 #include "../types.h"
 #include <pthread.h>
-
-typedef void(* HTTPFN_CALLBACK)(PHTTP_ARGUMENT Arguments,
-    WORD32 ArgumentCount, WORD64 RequestId);
+#include <microhttpd.h>
 
 typedef struct _HTTP_ARGUMENT {
     char Name[64]; // both
     char* Value; // app
     WORD32 ValueLength; // app
     WORD32 MaxLength; // http
+    int Overflows; // http
     unsigned char Present; // app
     unsigned char Required; // http
     char CustomError[64]; // http
 }HTTP_ARGUMENT, *PHTTP_ARGUMENT;
 
+typedef void(* HTTPFN_CALLBACK)(PHTTP_ARGUMENT Arguments,
+    WORD32 ArgumentCount, WORD64 RequestId);
+
 typedef struct _HTTP_ENDPOINT {
     pthread_mutex_t EndpointModifier;
     char EndpointURL[128];
+    HTTPFN_CALLBACK Callback;
     
     PHTTP_ARGUMENT Arguments;
     WORD32 ArgumentCount;
@@ -48,6 +51,9 @@ typedef struct _HTTP_REQUEST {
     char* ResponseBuffer;
     int ReturnCode;
     char* ReturnString;
+    unsigned char RequestCompleted;
+    
+    struct MHD_Connection *ThisConnection;
 }HTTP_REQUEST, *PHTTP_REQUEST;
 
 typedef struct _HTTP_CTX {
@@ -59,12 +65,13 @@ typedef struct _HTTP_CTX {
     PHTTP_REQUEST Requests;
     WORD64 RequestCount, RequestMax;
     
-    void* Context;
+    struct MHD_Daemon* MyDaemon;
+    WORD64 RequestIdCounter;
 }HTTP_CTX, *PHTTP_CTX;
 
 extern PHTTP_CTX HttpCtx;
 
-void HttpInit(void);
+void HttpInit(WORD16 Port);
 void HttpShutdown(void);
 
 WORD64 HttpEp_Register(const char* Endpoint, PHTTP_ARGUMENT Arguments,
@@ -81,6 +88,9 @@ void HttpRqe_ServeStatus(WORD64 Request, char* Status);
 void HttpRqe_ServeResponse(WORD64 Request, char* Response);
 void HttpRqe_Close(WORD64 Request);
 
-PHTTP_ARGUMENT HttpiParseArguments(char* Query, WORD32* ArgumentCount);
+enum MHD_Result HttpiDaemonAnswer(void* CLS,
+    struct MHD_Connection* Connection, const char* URL,
+    const char* Method, const char* Version, const char* Upload,
+    size_t* UploadSize, void** ConCls);
 
 #endif /* http_h */

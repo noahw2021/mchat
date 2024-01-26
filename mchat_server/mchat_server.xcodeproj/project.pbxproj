@@ -15,6 +15,7 @@
 		8CDEE6E92B63F6D00098A713 /* crypt_b64.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6E82B63F6D00098A713 /* crypt_b64.c */; };
 		8CDEE6ED2B63F7040098A713 /* app_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6EC2B63F7040098A713 /* app_init.c */; };
 		8CDEE6EF2B63F7100098A713 /* db_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6EE2B63F7100098A713 /* db_init.c */; };
+		8CDEE6F32B63FF300098A713 /* libmicrohttpd.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		8CDEE6EC2B63F7040098A713 /* app_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = app_init.c; sourceTree = "<group>"; };
 		8CDEE6EE2B63F7100098A713 /* db_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_init.c; sourceTree = "<group>"; };
 		8CDEE6F02B63F8290098A713 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmicrohttpd.12.dylib; path = ../../../../../../opt/homebrew/Cellar/libmicrohttpd/0.9.77/lib/libmicrohttpd.12.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CDEE6F32B63FF300098A713 /* libmicrohttpd.12.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +71,7 @@
 				8CDEE6D22B63F6250098A713 /* crypt */,
 				8CDEE6D12B63F61D0098A713 /* http */,
 				8C15BC312B4277F3007D5FE3 /* Products */,
+				8CDEE6F12B63FF300098A713 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +129,14 @@
 				8CDEE6EB2B63F6F70098A713 /* dbint.h */,
 			);
 			path = dbint;
+			sourceTree = "<group>";
+		};
+		8CDEE6F12B63FF300098A713 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +329,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /opt/homebrew/Cellar/libmicrohttpd/0.9.77/include;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libmicrohttpd/0.9.77/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -325,6 +342,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "/opt/homebrew/Cellar/libmicrohttpd/0.9.77/include/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libmicrohttpd/0.9.77/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

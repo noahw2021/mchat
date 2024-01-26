@@ -44,6 +44,6 @@ int NetwGetLastError(void);
 #define NETW_ERROR_NORESPONSE     0x03
 #define NETW_ERROR_TIMEOUT        0x04
 #define NETW_ERROR_METHNOTALLOWED 0x05
-#define NETW_ERROR_ 
+#define NETW_ERROR_OVERLOADED     0x06
 
 #endif /* netw_h */
