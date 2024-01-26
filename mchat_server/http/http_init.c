@@ -47,6 +47,9 @@ void HttpShutdown(void) {
     pthread_mutex_destroy(&HttpCtx->EndpointsMutex);
     pthread_mutex_destroy(&HttpCtx->RequestsMutex);
     
+    for (int i = 0; i < HttpCtx->EndpointCount; i++)
+        free(HttpCtx->Endpoints[i]);
+    
     if (HttpCtx->Endpoints)
         free(HttpCtx->Endpoints);
     if (HttpCtx->Requests)

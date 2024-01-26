@@ -58,7 +58,7 @@ typedef struct _HTTP_REQUEST {
 
 typedef struct _HTTP_CTX {
     pthread_mutex_t EndpointsMutex;
-    PHTTP_ENDPOINT Endpoints;
+    PHTTP_ENDPOINT* Endpoints;
     WORD32 EndpointCount;
     
     pthread_mutex_t RequestsMutex;
