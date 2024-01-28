@@ -10,6 +10,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <time.h>
 
 #include <microhttpd.h>
 

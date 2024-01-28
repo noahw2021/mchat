@@ -13,6 +13,8 @@
 int main(int argc, char** argv) {
     printf("MChat Modular Server on Port 4812.\n");
     
+    printf("a: %lu %lu\n", sizeof(time_t), sizeof(long));
+    
     HttpInit(4912);
     
     AppSetup();
