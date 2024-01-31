@@ -83,3 +83,21 @@ void DbSetWorkingBase(WORD64 BaseId) {
     DbCtx->ActiveWorkingBase = BaseId;
     return;
 }
+
+void* DbuRemoveEntry(void* Base, WORD64 Iterator, WORD64 MemberSize,
+    WORD64 OldEntries
+) {
+    BYTE* Return = malloc((OldEntries - 1) * MemberSize);
+    
+    WORD64 c = 0;
+    for (WORD64 i = 0; i < OldEntries; i++) {
+        if (i == Iterator)
+            continue;
+        
+        memcpy(Return + (MemberSize * c), Base + (MemberSize * i), 
+            MemberSize);
+        c++;
+    }
+    
+    return Return;
+}

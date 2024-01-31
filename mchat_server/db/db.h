@@ -119,10 +119,12 @@ typedef struct _DB_BASE {
     PDB_TABLE Tables; // not req. save
     WORD64 TableCount; // not req. save
     FILE* FilePointer; // not req. save
+    pthread_mutex_t Access; // not req. save
 }DB_BASE, *PDB_BASE;
-#define SZ__DB_BASE sizeof(DB_BASE) - (sizeof(PDB_TABLE) + sizeof(WORD64) + sizeof(FILE*))
+#define SZ__DB_BASE sizeof(DB_BASE) - (sizeof(PDB_TABLE) + sizeof(WORD64) + sizeof(FILE*) + sizeof(pthread_mutex_t))
 
 typedef struct _DB_CTX {
+    pthread_mutex_t BasesMutex;
     PDB_BASE Bases;
     WORD64 BaseCount;
     
@@ -152,5 +154,8 @@ void   DbBaseAddToEntryULong64(WORD64 TableId, WORD64 FieldId,
     WORD64 Data);
 void   DbBaseAddToEntryULong32(WORD64 TableId, WORD64 FieldId,
     WORD32 Data);
+
+void* DbuRemoveEntry(void* Base, WORD64 Iterator, WORD64 MemberSize,
+    WORD64 OldEntries);
 
 #endif /* db_h */
