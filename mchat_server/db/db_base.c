@@ -43,6 +43,9 @@ WORD64 DbOpenBase(const char* FileName) {
     NewBase->TableCount = 0; // must init at zero.
     
     NewBase->LocalBaseId = DbCtx->IteratorBase++;
+    pthread_mutex_init(&NewBase->NextFreeChunkMutex, NULL);
+    pthread_mutex_init(&NewBase->FileMutex, NULL);
+    pthread_mutex_init(&NewBase->Access, NULL);
     
     // load all tables and fields
     WORD64 NextTableOffset = NewBase->FirstTableOffset;
@@ -54,7 +57,9 @@ WORD64 DbOpenBase(const char* FileName) {
                 sizeof(DB_TABLE) * (NewBase->TableCount));
         }
         
-        PDB_TABLE NewTable = &NewBase->Tables[NewBase->TableCount];
+        PDB_TABLE* NewTable2 = &NewBase->Tables[NewBase->TableCount];
+        *NewTable2 = malloc(sizeof(DB_TABLE));
+        PDB_TABLE NewTable = *NewTable2;
         NewBase->TableCount++;
         
         fseek(InputFile, NextTableOffset, SEEK_SET);
@@ -137,7 +142,7 @@ void DbCloseBase(WORD64 BaseId) {
     pthread_mutex_lock(&ThisBase->Access);
     
     for (int i = 0; i < ThisBase->TableCount; i++) {
-        PDB_TABLE ThisTable = &ThisBase->Tables[i];
+        PDB_TABLE ThisTable = ThisBase->Tables[i];
         
         for (int e = 0; e < ThisTable->EntryCount; e++) {
             PDB_ENTRY ThisEntry = &ThisTable->Entries[e];
@@ -167,6 +172,8 @@ void DbCloseBase(WORD64 BaseId) {
         
         if (ThisTable->EntryIndexCount)
             free(ThisTable->EntryIndices);
+        
+        free(ThisTable);
     }
     
     if (ThisBase->Tables)

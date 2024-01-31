@@ -58,7 +58,7 @@ typedef struct _DB_ENTRY_FIELD {
 typedef struct _DB_ENTRY {
     WORD64 EntryId;
     WORD64 ParentTable;
-    WORD64 Previous, Next;
+    WORD64 Previous, Me, Next;
     time_t Created;
     time_t Modified;
     
@@ -71,7 +71,7 @@ typedef struct _DB_ENTRY {
 typedef struct _DB_FIELD {
     WORD64 FieldId;
     WORD64 ParentTable;
-    WORD64 Previous, Next;
+    WORD64 Previous, Me, Next;
     time_t Created;
     time_t Modified;
     
@@ -89,7 +89,7 @@ typedef struct _DB_TABLE {
     char TableName[128];
     time_t Created;
     time_t LastModified;
-    WORD64 Previous, Next;
+    WORD64 Previous, Me, Next;
     
     WORD64 FirstFieldOffset;
     WORD64 FieldCount;
@@ -105,6 +105,7 @@ typedef struct _DB_TABLE {
     PDB_ENTRY_INDEX EntryIndices;
     PDB_ENTRY Entries;
     PDB_FIELD Fields;
+    pthread_mutex_t Mutex;
 }DB_TABLE, *PDB_TABLE;
 #define SZ__DB_TABLE sizeof(DB_TABLE) - (sizeof(void*) * 3)
 
@@ -115,13 +116,16 @@ typedef struct _DB_BASE {
     
     WORD64 FirstTableOffset;
     WORD64 IteratorBase;
+    WORD64 NextFreeChunk;
     
-    PDB_TABLE Tables; // not req. save
+    PDB_TABLE* Tables; // not req. save
     WORD64 TableCount; // not req. save
     FILE* FilePointer; // not req. save
     pthread_mutex_t Access; // not req. save
+    pthread_mutex_t NextFreeChunkMutex;
+    pthread_mutex_t FileMutex;
 }DB_BASE, *PDB_BASE;
-#define SZ__DB_BASE sizeof(DB_BASE) - (sizeof(PDB_TABLE) + sizeof(WORD64) + sizeof(FILE*) + sizeof(pthread_mutex_t))
+#define SZ__DB_BASE sizeof(DB_BASE) - (sizeof(PDB_TABLE*) + sizeof(WORD64) + sizeof(FILE*) + (sizeof(pthread_mutex_t) * 3))
 
 typedef struct _DB_CTX {
     pthread_mutex_t BasesMutex;
