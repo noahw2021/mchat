@@ -1,0 +1,117 @@
+//
+//  db_base.c
+//  mchat_server
+//
+//  Created by Noah Wooten on 1/29/24.
+//
+
+#include "db.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+WORD64 DbCreateBase(const char* FileName) {
+    
+}
+
+WORD64 DbOpenBase(const char* FileName) {
+    if (!DbCtx)
+        return 0xFFFFFFFFFFFFFFFF;
+    
+    FILE* InputFile = fopen(FileName, "rb+");
+    if (!InputFile)
+        return 0xFFFFFFFFFFFFFFFF;
+    
+    if (!DbCtx->Bases) {
+        DbCtx->Bases = malloc(sizeof(DB_BASE));
+    } else {
+        DbCtx->Bases = realloc(DbCtx->Bases,
+            sizeof(DB_BASE) * (DbCtx->BaseCount + 1));
+    }
+    
+    PDB_BASE NewBase = &DbCtx->Bases[DbCtx->BaseCount + 1];
+    DbCtx->BaseCount++;
+    memset(NewBase, 0, sizeof(DB_BASE));
+    
+    fseek(InputFile, 0, SEEK_SET);
+    fread(NewBase, SZ__DB_BASE, 1, InputFile);
+    NewBase->TableCount = 0; // must init at zero.
+    
+    NewBase->LocalBaseId = DbCtx->IteratorBase++;
+    
+    // load all tables and fields
+    WORD64 NextTableOffset = NewBase->FirstTableOffset;
+    while (NextTableOffset) {
+        if (!NewBase->Tables) {
+            NewBase->Tables = malloc(sizeof(DB_TABLE));
+        } else {
+            NewBase->Tables = realloc(NewBase->Tables,
+                sizeof(DB_TABLE) * (NewBase->TableCount));
+        }
+        
+        PDB_TABLE NewTable = &NewBase->Tables[NewBase->TableCount];
+        NewBase->TableCount++;
+        
+        fseek(InputFile, NextTableOffset, SEEK_SET);
+        fread(NewTable, SZ__DB_TABLE, 1, InputFile);
+        NewTable->EntryCount = 0;
+        NewTable->FieldCount = 0;
+        NewTable->EntryIndexCount = 0;
+        
+        WORD64 NextFieldOffset = NewTable->FirstFieldOffset;
+        while (NextFieldOffset) {
+            if (!NewTable->Fields) {
+                NewTable->Fields = malloc(sizeof(DB_TABLE));
+            } else {
+                NewTable->Fields = realloc(NewTable->Fields,
+                    sizeof(DB_TABLE) * (NewTable->FieldCount + 1));
+            }
+            
+            PDB_FIELD NewField = &NewTable->Fields[NewTable->FieldCount];
+            NewTable->FieldCount++;
+            
+            fseek(InputFile, NextFieldOffset, SEEK_SET);
+            fread(NewField, SZ__DB_FIELD, 1, InputFile);
+            
+            NextFieldOffset = NewField->Next;
+        }
+        
+        WORD64 NextIndexOffset = NewTable->FirstEntryIndex;
+        while (NextIndexOffset) {
+            if (!NewTable->EntryIndices) {
+                NewTable->EntryIndices = malloc(sizeof(DB_ENTRY_INDEX));
+            } else {
+                NewTable->EntryIndices = realloc(NewTable->EntryIndices,
+                    sizeof(DB_ENTRY_INDEX) * (NewTable->EntryIndexCount));
+            }
+            
+            PDB_ENTRY_INDEX EntryIndex =
+                &NewTable->EntryIndices[NewTable->EntryIndexCount];
+            NewTable->EntryIndexCount++;
+            
+            fseek(InputFile, NewTable->FirstEntryIndex, SEEK_SET);
+            fread(EntryIndex, SZ__DB_ENTRY_INDEX, 1, InputFile);
+            
+            EntryIndex->IndexMembers = malloc(sizeof(DB_ENTRY_INDEX_MEMBER) *
+                (EntryIndex->IndexMemberSize));
+            fseek(InputFile, EntryIndex->FirstIndexMember, SEEK_SET);
+            fread(EntryIndex->IndexMembers, SZ__DB_ENTRY_INDEX_MEMBER,
+                EntryIndex->IndexMemberSize, InputFile);
+            
+            NextIndexOffset = EntryIndex->Next;
+        }
+        
+        NextTableOffset = NewTable->Next;
+    }
+    
+    
+    return;
+}
+
+void DbCloseBase(WORD64 BaseId) {
+    return;
+}
+
+void DbSetWorkingBase(WORD64 BaseId) {
+    return;
+}
