@@ -23,16 +23,20 @@ WORD64 DbOpenBase(const char* FileName) {
     if (!InputFile)
         return 0xFFFFFFFFFFFFFFFF;
     
+    pthread_mutex_lock(&DbCtx->BasesMutex);
     if (!DbCtx->Bases) {
-        DbCtx->Bases = malloc(sizeof(DB_BASE));
+        DbCtx->Bases = malloc(sizeof(DB_BASE*));
     } else {
         DbCtx->Bases = realloc(DbCtx->Bases,
-            sizeof(DB_BASE) * (DbCtx->BaseCount + 1));
+            sizeof(DB_BASE*) * (DbCtx->BaseCount + 1));
     }
     
-    PDB_BASE NewBase = &DbCtx->Bases[DbCtx->BaseCount + 1];
+    PDB_BASE* NewBase2 = &DbCtx->Bases[DbCtx->BaseCount + 1];
+    *NewBase2 = malloc(sizeof(DB_BASE));
+    PDB_BASE NewBase = *NewBase2;
     DbCtx->BaseCount++;
     memset(NewBase, 0, sizeof(DB_BASE));
+    pthread_mutex_unlock(&DbCtx->BasesMutex);
     
     fseek(InputFile, 0, SEEK_SET);
     fread(NewBase, SZ__DB_BASE, 1, InputFile);
@@ -113,13 +117,15 @@ void DbCloseBase(WORD64 BaseId) {
         return;
     
     PDB_BASE ThisBase = NULL;
+    WORD64 PhysIt = 0;
     
     pthread_mutex_lock(&DbCtx->BasesMutex);
     for (int i = 0; i < DbCtx->BaseCount; i++) {
-        PDB_BASE ActiveBase = &DbCtx->Bases[i];
+        PDB_BASE ActiveBase = DbCtx->Bases[i];
         
         if (ActiveBase->LocalBaseId == BaseId) {
             ThisBase = ActiveBase;
+            PhysIt = i;
             break;
         }
     }
@@ -169,8 +175,7 @@ void DbCloseBase(WORD64 BaseId) {
     pthread_mutex_destroy(&ThisBase->Access);
     
     pthread_mutex_lock(&DbCtx->BasesMutex);
-    WORD64 PhysIt = (ThisBase - DbCtx->Bases) / sizeof(DB_BASE);
-    void* NewBases = DbuRemoveEntry(DbCtx->Bases, PhysIt, sizeof(DB_BASE),
+    void* NewBases = DbuRemoveEntry(DbCtx->Bases, PhysIt, sizeof(DB_BASE*),
         DbCtx->BaseCount);
     void* OldBase = DbCtx->Bases;
     DbCtx->Bases = NewBases;

@@ -18,6 +18,7 @@
 		8CDEE6F32B63FF300098A713 /* libmicrohttpd.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */; };
 		8CDEE6F52B644FAB0098A713 /* app_serve.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6F42B644FAB0098A713 /* app_serve.c */; };
 		8CDEE70A2B67E9F40098A713 /* db_base.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE7092B67E9F40098A713 /* db_base.c */; };
+		8CDEE70C2B6A50F00098A713 /* db_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE70B2B6A50F00098A713 /* db_tables.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,7 @@
 		8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmicrohttpd.12.dylib; path = ../../../../../../opt/homebrew/Cellar/libmicrohttpd/0.9.77/lib/libmicrohttpd.12.dylib; sourceTree = "<group>"; };
 		8CDEE6F42B644FAB0098A713 /* app_serve.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = app_serve.c; sourceTree = "<group>"; };
 		8CDEE7092B67E9F40098A713 /* db_base.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_base.c; sourceTree = "<group>"; };
+		8CDEE70B2B6A50F00098A713 /* db_tables.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_tables.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				8CDEE6D72B63F6620098A713 /* db.h */,
 				8CDEE6EE2B63F7100098A713 /* db_init.c */,
 				8CDEE7092B67E9F40098A713 /* db_base.c */,
+				8CDEE70B2B6A50F00098A713 /* db_tables.c */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				8CDEE6F52B644FAB0098A713 /* app_serve.c in Sources */,
 				8CDEE70A2B67E9F40098A713 /* db_base.c in Sources */,
 				8CDEE6ED2B63F7040098A713 /* app_init.c in Sources */,
+				8CDEE70C2B6A50F00098A713 /* db_tables.c in Sources */,
 				8CDEE6E32B63F6B60098A713 /* http_serve.c in Sources */,
 				8CDEE6E92B63F6D00098A713 /* crypt_b64.c in Sources */,
 			);

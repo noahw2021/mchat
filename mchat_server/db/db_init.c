@@ -24,7 +24,7 @@ void DbShutdown(void) {
     
     if (DbCtx->Bases) {
         for (int i = 0; i < DbCtx->BaseCount; i++) {
-            PDB_BASE ThisBase = &DbCtx->Bases[i];
+            PDB_BASE ThisBase = DbCtx->Bases[i];
             if (ThisBase->Tables) {
                 for (int t = 0; t < ThisBase->TableCount; t++) {
                     PDB_TABLE ThisTable = &ThisBase->Tables[t];

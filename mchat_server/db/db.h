@@ -125,7 +125,7 @@ typedef struct _DB_BASE {
 
 typedef struct _DB_CTX {
     pthread_mutex_t BasesMutex;
-    PDB_BASE Bases;
+    PDB_BASE* Bases;
     WORD64 BaseCount;
     
     WORD64 IteratorBase;
@@ -154,6 +154,14 @@ void   DbBaseAddToEntryULong64(WORD64 TableId, WORD64 FieldId,
     WORD64 Data);
 void   DbBaseAddToEntryULong32(WORD64 TableId, WORD64 FieldId,
     WORD32 Data);
+
+void DbTableCreateIndex(WORD64 TableId, WORD64 IndexField0,
+    WORD64 IndexField1);
+void DbTableRemoveIndex(WORD64 TableId);
+
+PDB_ENTRY_FIELD_DATA DbEntryGetDataFromId(WORD64 TableId, WORD64 EntryId, 
+    WORD64 FieldId);
+void DbEntryDeleteFromId(WORD64 TableId, WORD64 EntryId);
 
 void* DbuRemoveEntry(void* Base, WORD64 Iterator, WORD64 MemberSize,
     WORD64 OldEntries);
