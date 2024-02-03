@@ -6,3 +6,15 @@
 //
 
 #include "db.h"
+
+HBASE DbCreate(const char* Name) {
+    return 0;
+}
+
+HBASE DbOpen(const char* Name) {
+    return 0;
+}
+
+void DbClose(HBASE Base) {
+    return;
+}

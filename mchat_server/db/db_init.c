@@ -6,3 +6,13 @@
 //
 
 #include "db.h"
+PDB_CTX DbCtx;
+
+void DbInit(void) {
+    return;
+}
+
+void DbShutdown(void) {
+    return;
+}
+

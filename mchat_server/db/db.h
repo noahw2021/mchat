@@ -19,6 +19,7 @@ typedef unsigned long long HENTRY, *PHENTRY;
 
 HBASE DbCreate(const char* Name);
 HBASE DbOpen(const char* Name);
+void DbClose(HBASE Base);
 
 HTABLE DbGetTableByName(HBASE Base, const char* Name);
 HTABLE DbGetTableByIterator(HBASE Base, int i);
@@ -116,5 +117,6 @@ typedef struct _DB_CTX {
     PDB_BASE Bases;
     WORD64 BaseCount;
 }DB_CTX, *PDB_CTX;
+extern PDB_CTX DbCtx;
 
 #endif /* db_h */
