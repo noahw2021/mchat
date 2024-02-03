@@ -176,14 +176,21 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
         SlashCount++;
     }
     
+    // attempt to locate the endpoint
     PHTTP_ENDPOINT TheEndpoint = NULL;
+    
+    // iterate through each endpoint
     for (int i = 0; i < HttpCtx->EndpointCount; i++) {
+        // get the endpoint pointer
         PHTTP_ENDPOINT ThisEndpoint = HttpCtx->Endpoints[i];
         HTTP_ENDPOINT EndpointData;
+        
+        // lock the mutex and read the data
         pthread_mutex_lock(&HttpCtx->EndpointsMutex);
         memcpy(&EndpointData, ThisEndpoint, sizeof(HTTP_ENDPOINT));
         pthread_mutex_unlock(&HttpCtx->EndpointsMutex);
         
+        // compare the string
         if (strstr(FullURL, EndpointData.EndpointURL)) {
             TheEndpoint = HttpEp_GetCopy(i);
             break;

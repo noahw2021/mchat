@@ -14,11 +14,8 @@
 		8CDEE6E72B63F6C90098A713 /* crypt_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6E62B63F6C90098A713 /* crypt_data.c */; };
 		8CDEE6E92B63F6D00098A713 /* crypt_b64.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6E82B63F6D00098A713 /* crypt_b64.c */; };
 		8CDEE6ED2B63F7040098A713 /* app_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6EC2B63F7040098A713 /* app_init.c */; };
-		8CDEE6EF2B63F7100098A713 /* db_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6EE2B63F7100098A713 /* db_init.c */; };
 		8CDEE6F32B63FF300098A713 /* libmicrohttpd.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */; };
 		8CDEE6F52B644FAB0098A713 /* app_serve.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6F42B644FAB0098A713 /* app_serve.c */; };
-		8CDEE70A2B67E9F40098A713 /* db_base.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE7092B67E9F40098A713 /* db_base.c */; };
-		8CDEE70C2B6A50F00098A713 /* db_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE70B2B6A50F00098A713 /* db_tables.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +34,6 @@
 		8C15BC302B4277F3007D5FE3 /* mchat_server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mchat_server; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CDEE6D52B63F6510098A713 /* http.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
 		8CDEE6D62B63F65C0098A713 /* crypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		8CDEE6D72B63F6620098A713 /* db.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
 		8CDEE6D82B63F6670098A713 /* app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
 		8CDEE6DE2B63F6980098A713 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		8CDEE6E02B63F6AF0098A713 /* http_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = http_init.c; sourceTree = "<group>"; };
@@ -47,12 +43,9 @@
 		8CDEE6E82B63F6D00098A713 /* crypt_b64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crypt_b64.c; sourceTree = "<group>"; };
 		8CDEE6EB2B63F6F70098A713 /* dbint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dbint.h; sourceTree = "<group>"; };
 		8CDEE6EC2B63F7040098A713 /* app_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = app_init.c; sourceTree = "<group>"; };
-		8CDEE6EE2B63F7100098A713 /* db_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_init.c; sourceTree = "<group>"; };
 		8CDEE6F02B63F8290098A713 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		8CDEE6F22B63FF300098A713 /* libmicrohttpd.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmicrohttpd.12.dylib; path = ../../../../../../opt/homebrew/Cellar/libmicrohttpd/0.9.77/lib/libmicrohttpd.12.dylib; sourceTree = "<group>"; };
 		8CDEE6F42B644FAB0098A713 /* app_serve.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = app_serve.c; sourceTree = "<group>"; };
-		8CDEE7092B67E9F40098A713 /* db_base.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_base.c; sourceTree = "<group>"; };
-		8CDEE70B2B6A50F00098A713 /* db_tables.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_tables.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +106,6 @@
 		8CDEE6D32B63F62A0098A713 /* db */ = {
 			isa = PBXGroup;
 			children = (
-				8CDEE6D72B63F6620098A713 /* db.h */,
-				8CDEE6EE2B63F7100098A713 /* db_init.c */,
-				8CDEE7092B67E9F40098A713 /* db_base.c */,
-				8CDEE70B2B6A50F00098A713 /* db_tables.c */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -208,12 +197,9 @@
 				8CDEE6DF2B63F6980098A713 /* main.c in Sources */,
 				8CDEE6E12B63F6AF0098A713 /* http_init.c in Sources */,
 				8CDEE6E52B63F6BD0098A713 /* http_points.c in Sources */,
-				8CDEE6EF2B63F7100098A713 /* db_init.c in Sources */,
 				8CDEE6E72B63F6C90098A713 /* crypt_data.c in Sources */,
 				8CDEE6F52B644FAB0098A713 /* app_serve.c in Sources */,
-				8CDEE70A2B67E9F40098A713 /* db_base.c in Sources */,
 				8CDEE6ED2B63F7040098A713 /* app_init.c in Sources */,
-				8CDEE70C2B6A50F00098A713 /* db_tables.c in Sources */,
 				8CDEE6E32B63F6B60098A713 /* http_serve.c in Sources */,
 				8CDEE6E92B63F6D00098A713 /* crypt_b64.c in Sources */,
 			);
