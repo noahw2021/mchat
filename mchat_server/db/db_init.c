@@ -15,6 +15,7 @@ void DbInit(void) {
     DbCtx = malloc(sizeof(DB_CTX));
     memset(DbCtx, 0, sizeof(DB_CTX));
     
+    pthread_mutex_init(&DbCtx->BasesMutex, NULL);
     return;
 }
 
@@ -35,6 +36,7 @@ void DbShutdown(void) {
                     if (ThisEntry->EntryValue)
                         free(ThisEntry->EntryValue);
                     
+                    pthread_mutex_destroy(&ThisEntry->EntryMutex);
                     free(ThisEntry);
                 }
                 
@@ -47,15 +49,19 @@ void DbShutdown(void) {
                     if (ThisIndex->IndexMembers)
                         free(ThisIndex->IndexMembers);
                     
+                    pthread_mutex_destroy(&ThisIndex->IndexMutex);
                     free(ThisIndex);
                 }
                 
                 if (ThisTable->Indices)
                     free(ThisTable->Indices);
                 
+                pthread_mutex_destroy(&ThisTable->EntriesMutex);
+                pthread_mutex_destroy(&ThisTable->IndicesMutex);
                 free(ThisTable);
             }
             
+            pthread_mutex_destroy(&ThisBase->TablesMutex);
             free(ThisBase);
         }
     
