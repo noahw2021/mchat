@@ -9,6 +9,7 @@
 #define db_h
 
 #include "../types.h"
+#include <pthread.h>
 
 void DbInit(void);
 void DbShutdown(void);
@@ -71,9 +72,10 @@ typedef struct _DB_INDEX {
     // do not include to save
     PDB_INDEX_MEMBER IndexMembers;
     WORD64 MemberCount;
+    pthread_mutex_t IndexMutex;
 }DB_INDEX, *PDB_INDEX;
 #define _SZ_DB_INDEX sizeof(DB_INDEX) - sizeof(PDB_INDEX_MEMBER) - \
-    sizeof(WORD64)
+    sizeof(WORD64) - sizeof(pthread_mutex_t)
 
 typedef struct _DB_ENTRY {
     WORD64 Previous, Me, Next;
@@ -82,11 +84,11 @@ typedef struct _DB_ENTRY {
     WORD64 QuickIndexValue;
     
     // do not include to save
-    PDB_ENTRY_VALUE EntryValues;
-    WORD64 EntryValueCount;
+    PDB_ENTRY_VALUE EntryValue;
+    pthread_mutex_t EntryMutex;
 }DB_ENTRY, *PDB_ENTRY;
 #define _SZ_DB_ENTRY sizeof(DB_ENTRY) - sizeof(PDB_ENTRY_VALUE) - \
-    sizeof(WORD64)
+    sizeof(WORD64) - sizeof(pthread_mutex_t)
 
 typedef struct _DB_TABLE {
     WORD64 Previous, Me, Next;
@@ -100,9 +102,11 @@ typedef struct _DB_TABLE {
     PDB_INDEX* Indices;
     WORD64 EntryCount;
     WORD64 IndexCount;
+    pthread_mutex_t EntriesMutex;
+    pthread_mutex_t IndicesMutex;
 }DB_TABLE, *PDB_TABLE;
 #define _SZ_DB_TABLE sizeof(DB_TABLE) - sizeof(PDB_ENRTY*) - \
-    sizeof(PDB_INDEX*) - sizeof(WORD64) - sizeof(WORD64)
+    sizeof(PDB_INDEX*) - sizeof(WORD64) - sizeof(WORD64) - sizeof(pthread_mutex_t) - sizeof(pthread_mutex_t)
 
 typedef struct _DB_BASE {
     WORD64 FirstTableOffset;
@@ -110,12 +114,15 @@ typedef struct _DB_BASE {
     // do not include to save
     PDB_TABLE* Tables;
     WORD64 TableCount;
+    pthread_mutex_t TablesMutex;
 }DB_BASE, *PDB_BASE;
-#define _SZ_DB_BASE sizeof(DB_BASE) - sizeof(PDB_TABLE*) - sizeof(WORD64)
+#define _SZ_DB_BASE sizeof(DB_BASE) - sizeof(PDB_TABLE*) - sizeof(WORD64) - sizeof(pthread_mutex_t)
 
 typedef struct _DB_CTX {
-    PDB_BASE Bases;
+    PDB_BASE* Bases;
     WORD64 BaseCount;
+    
+    pthread_mutex_t BasesMutex;
 }DB_CTX, *PDB_CTX;
 extern PDB_CTX DbCtx;
 

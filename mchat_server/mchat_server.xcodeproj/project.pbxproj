@@ -116,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				8C6DC5CE2B6ECD1A008B8C3E /* db.h */,
-				8C6DC5D02B6EDAA6008B8C3E /* db_base.c */,
 				8C6DC5CF2B6EDA9D008B8C3E /* db_init.c */,
+				8C6DC5D02B6EDAA6008B8C3E /* db_base.c */,
 				8C6DC5D12B6EDAB4008B8C3E /* db_table.c */,
 				8C6DC5D22B6EDABC008B8C3E /* db_entries.c */,
 			);
