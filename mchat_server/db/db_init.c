@@ -46,9 +46,6 @@ void DbShutdown(void) {
                 for (int i = 0; i < ThisTable->IndexCount; i++) {
                     PDB_INDEX ThisIndex = ThisTable->Indices[i];
                     
-                    if (ThisIndex->IndexMembers)
-                        free(ThisIndex->IndexMembers);
-                    
                     pthread_mutex_destroy(&ThisIndex->IndexMutex);
                     free(ThisIndex);
                 }
