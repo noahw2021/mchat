@@ -8,6 +8,9 @@
 #include "db.h"
 PDB_CTX DbCtx;
 
+#include <stdlib.h>
+#include <string.h>
+
 void DbInit(void) {
     return;
 }

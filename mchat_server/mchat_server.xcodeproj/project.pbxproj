@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C6DC5D32B6EDDE1008B8C3E /* db_base.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6DC5D02B6EDAA6008B8C3E /* db_base.c */; };
+		8C6DC5D42B6EDDE1008B8C3E /* db_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6DC5CF2B6EDA9D008B8C3E /* db_init.c */; };
+		8C6DC5D52B6EDDE1008B8C3E /* db_table.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6DC5D12B6EDAB4008B8C3E /* db_table.c */; };
+		8C6DC5D62B6EDDE1008B8C3E /* db_entries.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C6DC5D22B6EDABC008B8C3E /* db_entries.c */; };
 		8CDEE6DF2B63F6980098A713 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6DE2B63F6980098A713 /* main.c */; };
 		8CDEE6E12B63F6AF0098A713 /* http_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6E02B63F6AF0098A713 /* http_init.c */; };
 		8CDEE6E32B63F6B60098A713 /* http_serve.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CDEE6E22B63F6B60098A713 /* http_serve.c */; };
@@ -112,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				8C6DC5CE2B6ECD1A008B8C3E /* db.h */,
-				8C6DC5CF2B6EDA9D008B8C3E /* db_init.c */,
 				8C6DC5D02B6EDAA6008B8C3E /* db_base.c */,
+				8C6DC5CF2B6EDA9D008B8C3E /* db_init.c */,
 				8C6DC5D12B6EDAB4008B8C3E /* db_table.c */,
 				8C6DC5D22B6EDABC008B8C3E /* db_entries.c */,
 			);
@@ -204,6 +208,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6DC5D32B6EDDE1008B8C3E /* db_base.c in Sources */,
+				8C6DC5D42B6EDDE1008B8C3E /* db_init.c in Sources */,
+				8C6DC5D52B6EDDE1008B8C3E /* db_table.c in Sources */,
+				8C6DC5D62B6EDDE1008B8C3E /* db_entries.c in Sources */,
 				8CDEE6DF2B63F6980098A713 /* main.c in Sources */,
 				8CDEE6E12B63F6AF0098A713 /* http_init.c in Sources */,
 				8CDEE6E52B63F6BD0098A713 /* http_points.c in Sources */,
