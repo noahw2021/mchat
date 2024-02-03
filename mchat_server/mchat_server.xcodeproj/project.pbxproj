@@ -32,6 +32,11 @@
 
 /* Begin PBXFileReference section */
 		8C15BC302B4277F3007D5FE3 /* mchat_server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mchat_server; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C6DC5CE2B6ECD1A008B8C3E /* db.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = db.h; sourceTree = "<group>"; };
+		8C6DC5CF2B6EDA9D008B8C3E /* db_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_init.c; sourceTree = "<group>"; };
+		8C6DC5D02B6EDAA6008B8C3E /* db_base.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_base.c; sourceTree = "<group>"; };
+		8C6DC5D12B6EDAB4008B8C3E /* db_table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_table.c; sourceTree = "<group>"; };
+		8C6DC5D22B6EDABC008B8C3E /* db_entries.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = db_entries.c; sourceTree = "<group>"; };
 		8CDEE6D52B63F6510098A713 /* http.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
 		8CDEE6D62B63F65C0098A713 /* crypt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
 		8CDEE6D82B63F6670098A713 /* app.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
@@ -106,6 +111,11 @@
 		8CDEE6D32B63F62A0098A713 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				8C6DC5CE2B6ECD1A008B8C3E /* db.h */,
+				8C6DC5CF2B6EDA9D008B8C3E /* db_init.c */,
+				8C6DC5D02B6EDAA6008B8C3E /* db_base.c */,
+				8C6DC5D12B6EDAB4008B8C3E /* db_table.c */,
+				8C6DC5D22B6EDABC008B8C3E /* db_entries.c */,
 			);
 			path = db;
 			sourceTree = "<group>";
