@@ -26,7 +26,7 @@ void DbClose(HBASE Base);
 HTABLE DbGetTableByName(HBASE Base, const char* Name);
 HTABLE DbGetTableByIterator(HBASE Base, int i);
 char*  DbGetTableNameByIterator(HBASE Base, int i);
-int    DbGetTableCount(HBASE Base);
+WORD64 DbGetTableCount(HBASE Base);
 
 /*
  Tables can have indexes which are unsigned long longs and can be used
@@ -74,7 +74,6 @@ typedef struct _DB_ENTRY {
     WORD64 Previous, Me, Next;
     
     WORD64 DataPtr;
-    WORD64 QuickIndexValue;
     
     // do not include to save
     PDB_ENTRY_VALUE EntryValue;
@@ -89,6 +88,7 @@ typedef struct _DB_TABLE {
     char Name[128];
     WORD64 FirstEntryOffset;
     WORD64 FirstIndexOffset;
+    WORD64 StructSize;
     
     // do not include to save
     PDB_ENTRY* Entries;
@@ -103,6 +103,7 @@ typedef struct _DB_TABLE {
 
 typedef struct _DB_BASE {
     WORD64 FirstTableOffset;
+    WORD64 NextFreeSection;
     
     // do not include to save
     PDB_TABLE* Tables;
