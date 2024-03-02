@@ -41,7 +41,7 @@ void DbInit(void);
 void DbShutdown(void);
 
 HTABLE DbCreateTable(HBASE Base, const char* Name, WORD64 StructSize);
-void DbTableSetIndex(HBASE Base, WORD64 IndexOffset);
+void DbTableSetIndex(HBASE Base, HTABLE Table, WORD64 IndexOffset);
 
 HENTRY DbGetEntryByIterator(HBASE Base, HTABLE Table, WORD64 Iterator);
 HENTRY DbGetEntryByIndex(HBASE Base, HTABLE Table, WORD64 Index, int i);
@@ -74,6 +74,7 @@ typedef struct _DB_ENTRY {
     WORD64 Previous, Me, Next;
     
     WORD64 DataPtr;
+    WORD64 IndexPtr; // ptr to index
     
     // do not include to save
     PDB_ENTRY_VALUE EntryValue;

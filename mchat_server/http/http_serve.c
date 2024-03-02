@@ -103,16 +103,16 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
              */
             if (!strstr(QueryString, "=") ||
                 (strstr(QueryString, "&") < strstr(QueryString, "="))
-                ) {
+            ) {
                 const char* Response = "INVALID_REQUEST\r\nBAD_ARG";
                 struct MHD_Response* Resp =
                 MHD_create_response_from_buffer(strlen(Response),
-                                                (void*)Response, MHD_RESPMEM_PERSISTENT);
+                    (void*)Response, MHD_RESPMEM_PERSISTENT);
                 
                 MHD_add_response_header(Resp, "Server",
                         "MothServApp/1.0 GenericApp");
                 Return = MHD_queue_response(Connection,
-                                            MHD_HTTP_BAD_REQUEST, Resp);
+                    MHD_HTTP_BAD_REQUEST, Resp);
                 MHD_destroy_response(Resp);
                 
                 free(ThisRequest->Arguments);
@@ -134,7 +134,8 @@ enum MHD_Result HttpiDaemonAnswer(void* CLS,
                 // determine if the argument is over the allocated sz
                 if (NewArg->ValueLength > (64 * NewArg->Overflows) - 2) {
                     NewArg->Value = realloc(NewArg->Value,
-                                            64 * NewArg->Overflows);
+                        64 * NewArg->Overflows);
+                    
                     
                     NewArg->Overflows++;
                 }

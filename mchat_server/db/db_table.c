@@ -10,7 +10,9 @@
 #include <stdlib.h>
 
 HTABLE DbGetTableByName(HBASE Base, const char* Name) {
+    pthread_mutex_lock(&DbCtx->BasesMutex);
     PDB_BASE ThisBase = DbCtx->Bases[Base];
+    pthread_mutex_unlock(&DbCtx->BasesMutex);
     
     pthread_mutex_lock(&ThisBase->TablesMutex);
     for (int i = 0; i < ThisBase->TableCount; i++) {
@@ -113,6 +115,54 @@ HTABLE DbCreateTable(HBASE Base, const char* Name, WORD64 StructSize) {
     return (ThisBase->TableCount - 1);
 }
 
-void DbTableSetIndex(HBASE Base, WORD64 IndexOffset) {
+void DbTableSetIndex(HBASE Base, HTABLE Table, WORD64 IndexOffset) {
+    pthread_mutex_lock(&DbCtx->BasesMutex);
+    PDB_BASE ThisBase = DbCtx->Bases[Base];
+    pthread_mutex_unlock(&DbCtx->BasesMutex);
+    
+    pthread_mutex_lock(&ThisBase->TablesMutex);
+    PDB_TABLE ThisTable = ThisBase->Tables[Table];
+    pthread_mutex_unlock(&ThisBase->TablesMutex);
+    
+    // you cannot change an index once set
+    if (ThisTable->FirstIndexOffset)
+        return;
+    
+    pthread_mutex_lock(&ThisTable->EntriesMutex);
+    pthread_mutex_lock(&ThisTable->IndicesMutex);
+    /*
+     prevent any DB operations from happening while
+     we are working on this table.
+     */
+    
+    WORD64 EntriesRemaining = ThisTable->EntryCount;
+    while (EntriesRemaining) {
+        if (!ThisTable->Indices) {
+            ThisTable->Indices = malloc(sizeof(DB_INDEX**));
+            ThisTable->Indices[0] = malloc(sizeof(DB_INDEX));
+        } else {
+            ThisTable->Indices = realloc(ThisTable->Indices,
+                sizeof(DB_INDEX**) * (ThisTable->IndexCount + 1));
+            ThisTable->Indices[ThisTable->IndexCount] = 
+                malloc(sizeof(DB_INDEX));
+        }
+        
+        PDB_INDEX NewIndex = ThisTable->Indices[ThisTable->IndexCount];
+        ThisTable->IndexCount++;
+        
+        pthread_mutex_lock(&ThisBase->TablesMutex);
+        //ThisBase->
+        pthread_mutex_unlock(&ThisBase->TablesMutex);
+        
+        if (ThisTable->IndexCount - 1) {
+            PDB_INDEX Previous = 
+                ThisTable->Indices[ThisTable->IndexCount - 1];
+            Previous->Next =
+        }
+    }
+    
+    pthread_mutex_unlock(&ThisTable->EntriesMutex);
+    pthread_mutex_unlock(&ThisTable->IndicesMutex);
+    
     return;
 }
